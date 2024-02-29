@@ -120,17 +120,17 @@ public class VuelosController implements Initializable {
 
     }
 
-    public void switchScreen(ActionEvent event){
+    public void switchScreen(ActionEvent event) {
 
-        if(event.getSource() == buttonHome){
+        if (event.getSource() == buttonHome) {
             main_Pane.setVisible(true);
             about_Pane.setVisible(false);
             manageFlight_Pane.setVisible(false);
-        }else if(event.getSource() == buttonAddFlight){
+        } else if (event.getSource() == buttonAddFlight) {
             main_Pane.setVisible(false);
             about_Pane.setVisible(false);
             manageFlight_Pane.setVisible(true);
-        }else if(event.getSource() == buttonAbout){
+        } else if (event.getSource() == buttonAbout) {
             main_Pane.setVisible(false);
             about_Pane.setVisible(true);
             manageFlight_Pane.setVisible(false);
