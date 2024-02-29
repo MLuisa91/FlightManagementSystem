@@ -135,7 +135,6 @@ public class VuelosController implements Initializable {
             about_Pane.setVisible(true);
             manageFlight_Pane.setVisible(false);
         }
-
     }
 
     public void logOut(ActionEvent actionEvent) {
