@@ -1,0 +1,68 @@
+package com.donoso.easyflight.controlador;
+
+import com.donoso.easyflight.crud.CrudVuelos;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class HomeController implements Initializable {
+
+
+    @FXML
+    public BarChart dataChart;
+    @FXML
+    private Label main_TotalFlights;
+
+    @FXML
+    private Label main_TotalMonthlyFlights;
+
+    @FXML
+    private Label main_AnnualTotalFlights;
+    private CrudVuelos crudVuelos;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        pintarEstadísticas();
+    }
+
+    private void inicializarDataChart(Integer totalVuelosMesActual, Integer totalVuelosAnioAtual, Integer vuelosTotal) {
+        dataChart.setTitle("Vuelos Compañía");
+
+        XYChart.Series<String, Number> series1 = new XYChart.Series<>();
+        series1.setName("Vuelos Anual");
+        series1.getData().add(new XYChart.Data<>("Anual", totalVuelosAnioAtual));
+
+        XYChart.Series<String, Number> series2 = new XYChart.Series<>();
+        series2.setName("Vuelos Mensual");
+        series2.getData().add(new XYChart.Data<>("Mensual", totalVuelosMesActual));
+
+        XYChart.Series<String, Number> series3 = new XYChart.Series<>();
+        series3.setName("Vuelos Total");
+        series3.getData().add(new XYChart.Data<>("Total", vuelosTotal));
+
+        dataChart.getData().setAll(series1, series2, series3);
+
+    }
+
+    private void inicializarLabel(Integer totalVuelosMesActual, Integer totalVuelosAnioAtual, Integer vuelosTotal) {
+        crudVuelos = new CrudVuelos();
+        main_TotalMonthlyFlights.setText(totalVuelosMesActual.toString());
+        main_AnnualTotalFlights.setText(totalVuelosAnioAtual.toString());
+        main_TotalFlights.setText(vuelosTotal.toString());
+    }
+
+    private void pintarEstadísticas() {
+        crudVuelos = new CrudVuelos();
+        Integer totalVuelosMesActual = crudVuelos.vuelosTotalesMesActual();
+        Integer totalVuelosAnioAtual = crudVuelos.vuelosTotalesAnioActual();
+        Integer vuelosTotal = crudVuelos.vuelosTotales();
+
+        inicializarLabel(totalVuelosMesActual, totalVuelosAnioAtual, vuelosTotal);
+        inicializarDataChart(totalVuelosMesActual, totalVuelosAnioAtual, vuelosTotal);
+    }
+}

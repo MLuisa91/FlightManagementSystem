@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.donoso.easyflight.controlador.MainController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <BorderPane layoutX="215.0" layoutY="258.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <top>
+                  <AnchorPane prefHeight="35.0" prefWidth="200.0" styleClass="semi-top-form" stylesheets="@../estilos/GestionVuelos.css" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane layoutX="336.0" layoutY="-77.0" prefHeight="35.0" prefWidth="1100.0" styleClass="top-form" stylesheets="@../estilos/GestionVuelos.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                             <!-- <FontAwesomeIconView glyphName="PLANE" layoutX="14.0" layoutY="18.0" size="1.5em" />-->
+                              <Label layoutX="40.0" layoutY="5.0" text="Flight Management System">
+                                 <font>
+                                    <Font name="Tahoma" size="14.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="26.0" fitWidth="63.0" layoutX="9.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imagenes/online-booking_7508232.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </top>
+               <left>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane layoutX="-14.0" layoutY="103.0" prefHeight="564.8" prefWidth="200.0" styleClass="nav-form" stylesheets="@../estilos/GestionVuelos.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <ImageView fitHeight="111.0" fitWidth="143.0" layoutX="48.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imagenes/user_149071.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="60.0" layoutY="111.0" text="Bienvenido," textFill="WHITE">
+                                 <font>
+                                    <Font name="Tahoma" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="username" alignment="CENTER" layoutX="15.0" layoutY="133.0" prefHeight="23.0" prefWidth="174.0" text="Usuario" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Line endX="68.80000305175781" layoutX="117.0" layoutY="166.0" startX="-100.0" />
+                              <Button fx:id="buttonHome" layoutX="14.0" layoutY="189.0" mnemonicParsing="false" onAction="#switchScreen" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../estilos/GestionVuelos.css" text="Home" textAlignment="JUSTIFY">
+                                 <font>
+                                    <Font name="Tahoma" size="12.0" />
+                                 </font></Button>
+                              <Button fx:id="buttonAddFlight" alignment="CENTER" layoutX="14.0" layoutY="224.0" mnemonicParsing="false" onAction="#switchScreen" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../estilos/GestionVuelos.css" text="Add Flight" />
+                              <Button fx:id="buttonLogOut" graphicTextGap="0.0" layoutX="11.0" layoutY="508.0" mnemonicParsing="false" onAction="#logOut" prefHeight="37.0" prefWidth="38.0" stylesheets="@../estilos/GestionVuelos.css">
+
+                                 <styleClass>
+                                    <String fx:value="logout" />
+                                    <String fx:value="botonLogOut" />
+                                 </styleClass>
+                              </Button>
+                              <Label layoutX="60.0" layoutY="518.0" text="Logout" textFill="WHITE">
+                                 <font>
+                                    <Font name="Tahoma" size="14.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="28.0" fitWidth="30.0" layoutX="16.0" layoutY="514.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imagenes/log-out.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="29.0" fitWidth="22.0" layoutX="19.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imagenes/plus_12637227.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="25.0" fitWidth="24.0" layoutX="18.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imagenes/home_13317806.png" />
+                                 </image>
+                              </ImageView>
+                              <Button fx:id="buttonAbout" alignment="CENTER" layoutX="10.0" layoutY="298.0" mnemonicParsing="false" onAction="#switchScreen" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../estilos/GestionVuelos.css" text="About" />
+                              <ImageView fitHeight="22.0" fitWidth="23.0" layoutX="19.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imagenes/info_471662.png" />
+                                 </image>
+                              </ImageView>
+                              <Button fx:id="buttonAddPlane" alignment="CENTER" layoutX="14.0" layoutY="263.0" mnemonicParsing="false" onAction="#switchScreen" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../estilos/GestionVuelos.css" text="Add Plane" />
+                              <ImageView fitHeight="29.0" fitWidth="22.0" layoutX="19.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imagenes/plus_12637227.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </left>
+               <center>
+
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <fx:include source="Home.fxml" fx:id="main_Pane" />
+                        <fx:include source="ManageVuelos.fxml" fx:id="manageFlight_Pane" />
+                        <fx:include source="ManageAviones.fxml" fx:id="managePlane_Pane" />
+                        <fx:include source="AboutInfo.fxml" fx:id="about_Pane" />
+
+                     </children>
+                  </AnchorPane>
+               </center>
+            </BorderPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

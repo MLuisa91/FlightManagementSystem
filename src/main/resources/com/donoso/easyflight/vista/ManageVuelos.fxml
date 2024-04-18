@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import java.lang.String?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" layoutX="8.0" layoutY="8.0" prefHeight="548.0" prefWidth="885.0" visible="false" fx:controller="com.donoso.easyflight.controlador.ManageVuelosController">
+    <children>
+        <AnchorPane layoutX="7.0" layoutY="8.0" prefHeight="531.0" prefWidth="872.0" stylesheets="@../estilos/GestionVuelos.css">
+            <children>
+                <AnchorPane prefHeight="302.0" prefWidth="871.0" stylesheets="@../estilos/GestionVuelos.css">
+                    <styleClass>
+                        <String fx:value="white-bg" />
+                        <String fx:value="shadow" />
+                    </styleClass>
+                    <children>
+                        <TableView fx:id="tableViewFlight" layoutX="32.0" layoutY="48.0" prefHeight="231.0" prefWidth="742.0" onMouseClicked="#handleRowSelection">
+                            <columns>
+                                <TableColumn fx:id="column_Id" prefWidth="75.0" text="ID" />
+                                <TableColumn fx:id="column_Origen" prefWidth="126.4000244140625" text="Origen" />
+                                <TableColumn fx:id="column_Destino" prefWidth="126.39996337890625" text="Destino" />
+                                <TableColumn fx:id="column_Fecha" prefWidth="119.20001220703125" text="Fecha Salida" />
+                                <TableColumn fx:id="column_HoraSalida" prefWidth="94.4000244140625" text="Hora Salida" />
+                                <TableColumn fx:id="column_HoraLlegada" prefWidth="104.0" text="Hora Llegada" />
+                                <TableColumn fx:id="column_Avion" prefWidth="93.60001220703123" text="Avión" />
+                            </columns>
+                        </TableView>
+                        <TextField fx:id="txtSearchFlight" layoutX="32.0" layoutY="14.0" prefHeight="26.0" prefWidth="283.0" promptText="Search" styleClass="search" stylesheets="@../estilos/GestionVuelos.css" onKeyReleased="#buscar"/>
+                    </children>
+                </AnchorPane>
+                <TextField fx:id="txt_IdFlight" layoutX="120.0" layoutY="323.0" prefHeight="26.0" prefWidth="175.0" styleClass="textfield" stylesheets="@../estilos/GestionVuelos.css" promptText="XX0000"/>
+                <DatePicker fx:id="date_FechaSalidaFlight" layoutX="122.0" layoutY="455.0" />
+                <Label layoutX="95.0" layoutY="327.0" text="ID:" />
+                <Label layoutX="46.0" layoutY="459.0" text="Fecha Salida:" />
+                <Label layoutX="70.0" layoutY="415.0" text="Destino:" />
+                <Label layoutX="75.0" layoutY="369.0" text="Origen:" />
+                <TextField fx:id="txt_HoraSalidaFlight" layoutX="423.0" layoutY="324.0" prefHeight="26.0" prefWidth="175.0" styleClass="textfield" stylesheets="@../estilos/GestionVuelos.css" promptText="HH:mm:ss"/>
+                <TextField fx:id="txt_HoraLlegadaFlight" layoutX="424.0" layoutY="370.0" prefHeight="26.0" prefWidth="175.0" styleClass="textfield" stylesheets="@../estilos/GestionVuelos.css" promptText="HH:mm:ss"/>
+                <Label layoutX="347.0" layoutY="328.0" text="Hora Salida:" />
+                <Label layoutX="379.0" layoutY="419.0" text="Avión:" />
+                <Label layoutX="335.0" layoutY="374.0" text="Hora Llegada:" />
+                <ComboBox fx:id="combo_AvionFlight" layoutX="423.0" layoutY="414.0" prefHeight="26.0" prefWidth="177.0" />
+                <Button fx:id="button_ManagementFlightAdd" layoutX="660.0" layoutY="325.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="90.0" styleClass="buttonAction" onAction="#addFlight" stylesheets="@../estilos/GestionVuelos.css" text="Add" />
+                <Button fx:id="button_ManagementFlightUpdate" layoutX="660.0" layoutY="370.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="90.0" styleClass="buttonAction" onAction="#updateFlight" stylesheets="@../estilos/GestionVuelos.css" text="Update" />
+                <Button fx:id="button_ManagementFlightClear" layoutX="660.0" layoutY="414.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="90.0" styleClass="buttonAction" onAction="#clearFlieds" stylesheets="@../estilos/GestionVuelos.css" text="Clear" />
+                <Button fx:id="button_ManagementFlightDelete" layoutX="660.0" layoutY="454.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="90.0" styleClass="buttonAction" onAction="#deleteFlight" stylesheets="@../estilos/GestionVuelos.css" text="Delete" />
+                <ComboBox id="combo_OrigenFlight" fx:id="combo_OrigenFlight" layoutX="121.0" layoutY="367.0" prefHeight="26.0" prefWidth="177.0" />
+                <ComboBox id="combo_DestinoFlight" fx:id="combo_DestinoFlight" layoutX="121.0" layoutY="413.0" prefHeight="26.0" prefWidth="177.0" />
+            </children>
+            <styleClass>
+                <String fx:value="shadow" />
+                <String fx:value="white-bg" />
+            </styleClass>
+        </AnchorPane>
+    </children>
+</AnchorPane>

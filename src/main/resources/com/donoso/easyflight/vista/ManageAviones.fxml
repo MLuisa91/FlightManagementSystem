@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import java.lang.String?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" layoutX="8.0" layoutY="8.0" prefHeight="548.0" prefWidth="885.0" visible="false" fx:controller="com.donoso.easyflight.controlador.ManageAvionesController">
+    <children>
+        <AnchorPane layoutX="7.0" layoutY="8.0" prefHeight="531.0" prefWidth="872.0" stylesheets="@../estilos/GestionVuelos.css">
+            <children>
+                <AnchorPane prefHeight="302.0" prefWidth="871.0" stylesheets="@../estilos/GestionVuelos.css">
+                    <styleClass>
+                        <String fx:value="white-bg" />
+                        <String fx:value="shadow" />
+                    </styleClass>
+                    <children>
+                        <TableView fx:id="tableViewPlanes" layoutX="32.0" layoutY="48.0" prefHeight="231.0" prefWidth="742.0" onMouseClicked="#handleRowSelection">
+                            <columns>
+                                <TableColumn fx:id="column_Id" prefWidth="247" text="ID" />
+                                <TableColumn fx:id="column_modelo" prefWidth="247" text="Modelo" />
+                                <TableColumn fx:id="column_pasajeros" prefWidth="247" text="Pasajeros" />
+                            </columns>
+                        </TableView>
+                        <TextField fx:id="txtSearchPlanes" layoutX="32.0" layoutY="14.0" prefHeight="26.0" prefWidth="283.0" promptText="Search" styleClass="search" stylesheets="@../estilos/GestionVuelos.css" onKeyReleased="#buscar"/>
+                    </children>
+                </AnchorPane>
+                <Label layoutX="95.0" layoutY="327.0" text="ID:" />
+                <Label layoutX="65.0" layoutY="369.0" text="Pasajeros:" />
+                <Label layoutX="347.0" layoutY="328.0" text="Modelo:" />
+                <TextField fx:id="txt_IdPlane" layoutX="120.0" layoutY="323.0" prefHeight="26.0" prefWidth="175.0" styleClass="textfield" stylesheets="@../estilos/GestionVuelos.css" promptText="X000"/>
+                <TextField fx:id="txt_PlaneModel" layoutX="423.0" layoutY="324.0" prefHeight="26.0" prefWidth="175.0" styleClass="textfield" stylesheets="@../estilos/GestionVuelos.css"/>
+                <TextField id="txt_PasengersNumber" fx:id="txt_PasengersNumber" layoutX="121.0" layoutY="367.0" prefHeight="26.0" prefWidth="177.0" styleClass="textfield" stylesheets="@../estilos/GestionVuelos.css"/>
+                <Button fx:id="button_ManagementPlaneAdd" layoutX="660.0" layoutY="325.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="90.0" styleClass="buttonAction" onAction="#addPlane" stylesheets="@../estilos/GestionVuelos.css" text="Add" />
+                <Button fx:id="button_ManagementPlaneUpdate" layoutX="660.0" layoutY="370.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="90.0" styleClass="buttonAction" onAction="#updatePlane" stylesheets="@../estilos/GestionVuelos.css" text="Update" />
+                <Button fx:id="button_ManagementPlaneClear" layoutX="660.0" layoutY="414.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="90.0" styleClass="buttonAction" onAction="#clearPlane" stylesheets="@../estilos/GestionVuelos.css" text="Clear" />
+                <Button fx:id="button_ManagementPlaneDelete" layoutX="660.0" layoutY="454.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="90.0" styleClass="buttonAction" onAction="#deletePlane" stylesheets="@../estilos/GestionVuelos.css" text="Delete" />
+            </children>
+            <styleClass>
+                <String fx:value="shadow" />
+                <String fx:value="white-bg" />
+            </styleClass>
+        </AnchorPane>
+    </children>
+</AnchorPane>

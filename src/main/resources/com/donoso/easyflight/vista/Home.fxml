@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<AnchorPane layoutX="197.0" layoutY="182.0" prefHeight="564.8" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+            AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.donoso.easyflight.controlador.HomeController">
+    <children>
+        <AnchorPane layoutX="12.0" layoutY="12.0" prefHeight="538.0" prefWidth="876.0" stylesheets="@../estilos/GestionVuelos.css">
+            <styleClass>
+                <String fx:value="white-bg" />
+                <String fx:value="shadow" />
+            </styleClass>
+            <children>
+                <AnchorPane prefHeight="170.0" prefWidth="876.0" stylesheets="@../estilos/GestionVuelos.css">
+                    <styleClass>
+                        <String fx:value="white-bg" />
+                        <String fx:value="shadow" />
+                    </styleClass>
+                    <children>
+                        <AnchorPane layoutX="14.0" layoutY="9.0" prefHeight="152.0" prefWidth="269.0" stylesheets="@../estilos/GestionVuelos.css">
+                            <styleClass>
+                                <String fx:value="nav-form" />
+                                <String fx:value="card" />
+                            </styleClass>
+                            <children>
+                                <ImageView fitHeight="59.0" fitWidth="39.0" layoutX="14.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../imagenes/airplane_1433424.png" />
+                                    </image>
+                                </ImageView>
+                                <Label layoutX="64.0" layoutY="96.0" prefHeight="34.0" prefWidth="147.0" text="Total Flights" textFill="WHITE">
+                                    <font>
+                                        <Font name="Tahoma" size="17.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="main_TotalFlights" alignment="CENTER_RIGHT" layoutX="92.0" layoutY="14.0" prefHeight="34.0" prefWidth="147.0" text="0" textFill="WHITE">
+                                    <font>
+                                        <Font name="Arial" size="20.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="303.0" layoutY="9.0" prefHeight="152.0" prefWidth="269.0" stylesheets="@../estilos/GestionVuelos.css">
+                            <styleClass>
+                                <String fx:value="nav-form" />
+                                <String fx:value="card" />
+                            </styleClass>
+                            <children>
+                                <ImageView fitHeight="59.0" fitWidth="39.0" layoutX="14.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../imagenes/airplane_1433424.png" />
+                                    </image>
+                                </ImageView>
+                                <Label layoutX="64.0" layoutY="100.0" prefHeight="34.0" prefWidth="167.0" text="Annual Total Flights" textFill="WHITE">
+                                    <font>
+                                        <Font name="Tahoma" size="17.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="main_AnnualTotalFlights" alignment="CENTER_RIGHT" layoutX="92.0" layoutY="18.0" prefHeight="34.0" prefWidth="147.0" text="0" textFill="WHITE">
+                                    <font>
+                                        <Font name="Arial" size="20.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="592.0" layoutY="9.0" prefHeight="152.0" prefWidth="269.0" stylesheets="@../estilos/GestionVuelos.css">
+                            <styleClass>
+                                <String fx:value="nav-form" />
+                                <String fx:value="card" />
+                            </styleClass>
+                            <children>
+                                <ImageView fitHeight="59.0" fitWidth="39.0" layoutX="14.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../imagenes/airplane_1433424.png" />
+                                    </image>
+                                </ImageView>
+                                <Label layoutX="64.0" layoutY="100.0" prefHeight="34.0" prefWidth="170.0" text="Total Monthly Flights" textFill="WHITE">
+                                    <font>
+                                        <Font name="Tahoma" size="17.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="main_TotalMonthlyFlights" alignment="CENTER_RIGHT" layoutX="92.0" layoutY="18.0" prefHeight="34.0" prefWidth="147.0" text="0" textFill="WHITE">
+                                    <font>
+                                        <Font name="Arial" size="20.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </AnchorPane>
+                <BarChart fx:id="dataChart" layoutX="152.0" layoutY="199.0" prefHeight="314.0" prefWidth="572.0" title="Flight Data Chart">
+                    <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis side="LEFT" />
+                    </yAxis>
+                </BarChart>
+            </children>
+        </AnchorPane>
+    </children></AnchorPane>
