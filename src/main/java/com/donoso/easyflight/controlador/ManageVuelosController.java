@@ -1,13 +1,12 @@
 package com.donoso.easyflight.controlador;
 
 import com.donoso.easyflight.contexto.UsuarioHolder;
-import com.donoso.easyflight.crud.CrudAeropuertos;
-import com.donoso.easyflight.crud.CrudAviones;
-import com.donoso.easyflight.crud.CrudVuelos;
+import com.donoso.easyflight.http.HttpClient;
 import com.donoso.easyflight.pojos.Aeropuerto;
 import com.donoso.easyflight.pojos.Avion;
 import com.donoso.easyflight.pojos.Usuario;
 import com.donoso.easyflight.pojos.Vuelo;
+import com.donoso.easyflight.utils.URLApi;
 import com.donoso.easyflight.utils.Utiles;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -30,18 +29,12 @@ import java.net.URL;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 public class ManageVuelosController implements Initializable {
 
     public ComboBox<Aeropuerto> combo_OrigenFlight;
     public ComboBox<Aeropuerto> combo_DestinoFlight;
-    private CrudVuelos crudVuelos;
-    private CrudAeropuertos crudAeropuertos;
-    private CrudAviones crudAviones;
 
     @FXML
     private TableView<Vuelo> tableViewFlight;
@@ -84,72 +77,49 @@ public class ManageVuelosController implements Initializable {
 
     @FXML
     private DatePicker date_FechaSalidaFlight;
-    @FXML
-    private Button button_ManagementFlightAdd;
-
-    @FXML
-    private Button button_ManagementFlightClear;
-
-    @FXML
-    private Button button_ManagementFlightDelete;
-
-    @FXML
-    private Button button_ManagementFlightUpdate;
-
-    private ObservableList<Vuelo> listaVuelos;
-    private ObservableList<Aeropuerto> listaAeropuertos;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         UsuarioHolder holder = UsuarioHolder.getInstance();
         Usuario usuario = holder.getUsuario();
 
-        if (!usuario.getIsAdministrador()) {
-            deshabilitarCampos();
+        try {
+            inicializaTableView();
+            inicializaComboBoxAviones();
+            inicializaComboBoxAeropuertos();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
 
-        inicializaTableView();
-        inicializaComboBoxAviones();
-        inicializaComboBoxAeropuertos();
     }
 
-    private void deshabilitarCampos() {
-        button_ManagementFlightAdd.setDisable(true);
-        button_ManagementFlightClear.setDisable(true);
-        button_ManagementFlightDelete.setDisable(true);
-        button_ManagementFlightUpdate.setDisable(true);
-        txt_IdFlight.setEditable(false);
-        combo_OrigenFlight.setDisable(true);
-        combo_DestinoFlight.setDisable(true);
-        txt_HoraLlegadaFlight.setEditable(false);
-        txt_HoraSalidaFlight.setEditable(false);
-        date_FechaSalidaFlight.setDisable(true);
-        combo_AvionFlight.setDisable(true);
-    }
-
-    private void inicializaComboBoxAeropuertos() {
-        crudAeropuertos = new CrudAeropuertos();
-        listaAeropuertos = crudAeropuertos.listAll();
-        combo_OrigenFlight.setItems(listaAeropuertos);
+    private void inicializaComboBoxAeropuertos() throws Exception {
+        HttpClient<Aeropuerto, Aeropuerto[]> client = new HttpClient<>(Aeropuerto[].class);
+        Aeropuerto[] lista = client.execute(URLApi.API_AEROPUERTO_SEARCH, new Aeropuerto(), "POST");
+        ObservableList<Aeropuerto> aeropuertos = FXCollections.observableArrayList(lista);
+        combo_OrigenFlight.setItems(aeropuertos);
         combo_OrigenFlight.setConverter(new Aeropuerto());
-        combo_DestinoFlight.setItems(listaAeropuertos);
+        combo_DestinoFlight.setItems(aeropuertos);
         combo_DestinoFlight.setConverter(new Aeropuerto());
 
     }
 
-    public void inicializaComboBoxAviones() {
-        crudAviones = new CrudAviones();
-        List<Avion> lista = crudAviones.listAll();
+    public void inicializaComboBoxAviones() throws Exception {
+        HttpClient<Avion, Avion[]> client = new HttpClient<>(Avion[].class);
+        Avion[] lista = client.execute(URLApi.API_AVION_SEARCH, new Avion(), "POST");
         ObservableList<Avion> aviones = FXCollections.observableArrayList(lista);
-        ;
+
         combo_AvionFlight.setItems(aviones);
         combo_AvionFlight.setConverter(new Avion());
     }
 
-    private void inicializaTableView() {
-        crudVuelos = new CrudVuelos();
-        listaVuelos = crudVuelos.listAll();
-        this.tableViewFlight.setItems(listaVuelos);
+    private void inicializaTableView() throws Exception {
+        HttpClient<Vuelo, Vuelo[]> client = new HttpClient<>(Vuelo[].class);
+        Vuelo[] lista = client.execute(URLApi.API_VUELO_SEARCH, new Vuelo(), "POST");
+
+        ObservableList<Vuelo> vuelos = FXCollections.observableArrayList(lista);
+
+        this.tableViewFlight.setItems(vuelos);
         column_Id.setCellValueFactory(new PropertyValueFactory<>("id"));
         column_Origen.setCellValueFactory(origenStringCellDataFeatures -> new SimpleStringProperty(origenStringCellDataFeatures.getValue().getOrigen().getNombre()));
         column_Destino.setCellValueFactory(origenStringCellDataFeatures -> new SimpleStringProperty(origenStringCellDataFeatures.getValue().getDestino().getNombre()));
@@ -159,16 +129,25 @@ public class ManageVuelosController implements Initializable {
         column_Avion.setCellValueFactory(vueloStringCellDataFeatures -> new SimpleStringProperty(vueloStringCellDataFeatures.getValue().getAvion().getId()));
     }
 
-    public void addFlight(ActionEvent actionEvent) throws IOException {
+    public void addFlight(ActionEvent actionEvent) throws Exception {
         Vuelo vuelo = recogerDatos();
-        if (vuelo != null && crudVuelos.add(vuelo)) {
-            mostrarMensajes("Información", "La operación se ha realizado correctamente.", Alert.AlertType.INFORMATION);
-            limpiarCampos();
-            reloadScreenHome(actionEvent);
-        } else
-            mostrarMensajes("Error", "Se ha producido un error al dar de alta el vuelo.", Alert.AlertType.ERROR);
+        HttpClient<Vuelo, Vuelo> client = new HttpClient<>(Vuelo.class);
 
-        inicializaTableView();
+        if (vuelo != null) {
+            try {
+                if (client.execute(URLApi.API_VUELO_BY_ID.replace("{id}", vuelo.getId()), null, "GET") == null) {
+                    client.execute(URLApi.API_VUELO_CREATE, vuelo, "POST");
+                    limpiarCampos();
+                    mostrarMensajes("Información", "La operación se ha relizado correctamente.", Alert.AlertType.INFORMATION);
+                    reloadScreenHome(actionEvent);
+                } else {
+                    mostrarMensajes("Advertencia", "El vuelo ya existe en base de datos", Alert.AlertType.INFORMATION);
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+        }
 
     }
 
@@ -267,13 +246,20 @@ public class ManageVuelosController implements Initializable {
     }
 
     @FXML
-    private void updateFlight(ActionEvent actionEvent) throws IOException {
+    private void updateFlight(ActionEvent actionEvent) throws Exception {
         Vuelo vuelo = recogerDatos();
-        if (vuelo != null && crudVuelos.update(vuelo)) {
-            mostrarMensajes("Información", "La operación se ha relizado correctamente.", Alert.AlertType.INFORMATION);
-            reloadScreenHome(actionEvent);
-        } else {
-            mostrarMensajes("Error", "Se ha producido un error en la actualización del vuelo.", Alert.AlertType.ERROR);
+        HttpClient<Vuelo, Vuelo> client = new HttpClient<>(Vuelo.class);
+        try {
+            if (client.execute(URLApi.API_VUELO_BY_ID.replace("{id}", vuelo.getId()), null, "GET") != null) {
+                client.execute(URLApi.API_VUELO_UPDATE, vuelo, "PUT");
+                mostrarMensajes("Información", "La operación se ha relizado correctamente.", Alert.AlertType.INFORMATION);
+                limpiarCampos();
+                reloadScreenHome(actionEvent);
+            } else {
+                mostrarMensajes("Error", "Se ha producido un error en la actualización.", Alert.AlertType.ERROR);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         inicializaTableView();
     }
@@ -294,14 +280,23 @@ public class ManageVuelosController implements Initializable {
     }
 
     @FXML
-    private void deleteFlight(ActionEvent actionEvent) throws IOException {
+    private void deleteFlight(ActionEvent actionEvent) throws Exception {
         Vuelo vueloSeleccionado = tableViewFlight.getSelectionModel().getSelectedItem();
-        if (vueloSeleccionado != null && crudVuelos.delete(vueloSeleccionado)) {
-            mostrarMensajes("Información", "La operación se ha realizado correctamente.", Alert.AlertType.INFORMATION);
-            limpiarCampos();
-            reloadScreenHome(actionEvent);
-        } else {
-            mostrarMensajes("Error", "Se ha producido un error al eliminar el vuelo.", Alert.AlertType.ERROR);
+        HttpClient<Vuelo, Vuelo> client = new HttpClient<>(Vuelo.class);
+        if (vueloSeleccionado != null) {
+            try {
+                Vuelo vuelo = client.execute(URLApi.API_VUELO_BY_ID.replace("{id}", vueloSeleccionado.getId()), null, "GET");
+                if (vuelo != null) {
+                    client.execute(URLApi.API_VUELO_DELETE.replace("{id}", vueloSeleccionado.getId()), vueloSeleccionado, "DELETE");
+                    mostrarMensajes("Información", "La operación se ha relizado correctamente.", Alert.AlertType.INFORMATION);
+                    limpiarCampos();
+                    reloadScreenHome(actionEvent);
+                } else {
+                    mostrarMensajes("Error", "Se ha producido un error en el borrado del vuelo.", Alert.AlertType.ERROR);
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
         inicializaTableView();
     }
@@ -322,14 +317,15 @@ public class ManageVuelosController implements Initializable {
     }
 
     @FXML
-    private void buscar(KeyEvent keyEvent) {
+    private void buscar(KeyEvent keyEvent) throws Exception {
         String texto = txtSearchFlight.getText();
-        if (texto.length() >= 3) {
-            Map<String, String> sqlWhere = obtenenerCondicionesWhere(texto);
+        HttpClient<Vuelo, Vuelo[]> client = new HttpClient<>(Vuelo[].class);
 
-            List<Vuelo> lista = crudVuelos.searchVuelos(sqlWhere);
+        if (texto.length() >= 3) {
+            Vuelo vuelo = obtenenerCondicionesWhere(texto);
+
+            Vuelo[] lista = client.execute(URLApi.API_VUELO_SEARCH, vuelo, "POST");
             ObservableList<Vuelo> vuelosFiltrados = FXCollections.observableArrayList(lista);
-            ;
             tableViewFlight.setItems(vuelosFiltrados);
             column_Id.setCellValueFactory(new PropertyValueFactory<>("id"));
             column_Origen.setCellValueFactory(origenStringCellDataFeatures -> new SimpleStringProperty(origenStringCellDataFeatures.getValue().getOrigen().getNombre()));
@@ -339,21 +335,21 @@ public class ManageVuelosController implements Initializable {
             column_HoraLlegada.setCellValueFactory(new PropertyValueFactory<>("horaLlegada"));
             column_Avion.setCellValueFactory(vueloStringCellDataFeatures -> new SimpleStringProperty(vueloStringCellDataFeatures.getValue().getAvion().getId()));
         } else {
-            tableViewFlight.setItems(listaVuelos);
+            inicializaTableView();
         }
     }
 
-    private Map<String, String> obtenenerCondicionesWhere(String texto) {
-        Map<String, String> sqlWhere = new HashMap<>();
-        sqlWhere.put("v.id", "%".concat(texto).concat("%"));
-        sqlWhere.put("aeo.nombre", "%".concat(texto).concat("%"));
-        sqlWhere.put("aed.nombre", "%".concat(texto).concat("%"));
-        sqlWhere.put("v.fechaSalida", "%".concat(texto).concat("%"));
-        sqlWhere.put("v.horaSalida", "%".concat(texto).concat("%"));
-        sqlWhere.put("v.horaLlegada", "%".concat(texto).concat("%"));
-        sqlWhere.put("v.avion", "%".concat(texto).concat("%"));
+    private Vuelo obtenenerCondicionesWhere(String texto) {
+        LocalDate fecha = null;
+        LocalTime hora = null;
+        if (Utiles.validarSiFecha(texto)) {
+            fecha = Utiles.convertirADate(texto);
+        }
+        if (Utiles.validarHora(texto)) {
+            hora = Utiles.convertirATime(texto);
+        }
 
-        return sqlWhere;
+        return new Vuelo(texto, new Aeropuerto(null, texto), new Aeropuerto(null, texto), fecha, hora, hora, new Avion(null, texto, null));
     }
 
     private void reloadScreenHome(ActionEvent event) throws IOException {

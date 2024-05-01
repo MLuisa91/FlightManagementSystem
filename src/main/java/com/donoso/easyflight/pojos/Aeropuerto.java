@@ -21,7 +21,8 @@ public class Aeropuerto extends StringConverter<Aeropuerto> implements Serializa
 
     @Override
     public String toString(Aeropuerto aeropuerto) {
-        return null;
+        return aeropuerto != null ? aeropuerto.getNombre() : "Seleccione una opción";
+
     }
 
     @Override

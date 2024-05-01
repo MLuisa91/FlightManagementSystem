@@ -3,6 +3,8 @@ package com.donoso.easyflight.utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 public class JsonConverter<T> {
 
@@ -12,6 +14,9 @@ public class JsonConverter<T> {
     public JsonConverter(Class<T> tClass) {
         super();
         objectMapper.configure(MapperFeature.CAN_OVERRIDE_ACCESS_MODIFIERS, false);
+        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        objectMapper.registerModule(new JavaTimeModule());
+
         this.tClass = tClass;
     }
 
@@ -34,7 +39,7 @@ public class JsonConverter<T> {
      * @throws Exception
      */
     public T jsonToObject(String response) throws Exception {
-        return objectMapper.readValue(response, tClass);
+        return "".equals(response) ? null : objectMapper.readValue(response, tClass);
     }
 
     /**

@@ -28,6 +28,14 @@ public class MainController implements Initializable {
     @FXML
     public Button buttonAddPlane;
     @FXML
+    public AnchorPane manageUsuarios_Pane;
+    @FXML
+    public Button buttonAddUsuario;
+    public Button buttonAddBooking;
+    public Button buttonAddOffer;
+    public AnchorPane manageOffer_Pane;
+    public AnchorPane manageBooking_Pane;
+    @FXML
     private AnchorPane about_Pane;
 
     @FXML
@@ -35,6 +43,8 @@ public class MainController implements Initializable {
 
     @FXML
     private Button buttonAddFlight;
+    @FXML
+    private Button button;
 
     @FXML
     private Button buttonHome;
@@ -62,8 +72,11 @@ public class MainController implements Initializable {
     public void switchScreen(ActionEvent event) throws IOException {
         UsuarioHolder holder = UsuarioHolder.getInstance();
         holder.setLatestScreen(event.getSource());
+        //si permisos
         enableScreen(event.getSource());
     }
+
+
 
     public void enableScreen(Object screen) {
         if (((Button) screen).getId().equals(buttonHome.getId())) {
@@ -71,21 +84,43 @@ public class MainController implements Initializable {
             about_Pane.setVisible(false);
             manageFlight_Pane.setVisible(false);
             managePlane_Pane.setVisible(false);
+            manageUsuarios_Pane.setVisible(false);
+            manageOffer_Pane.setVisible(false);
         } else if (((Button) screen).getId().equals(buttonAddFlight.getId())) {
             main_Pane.setVisible(false);
             about_Pane.setVisible(false);
             manageFlight_Pane.setVisible(true);
             managePlane_Pane.setVisible(false);
+            manageUsuarios_Pane.setVisible(false);
+            manageOffer_Pane.setVisible(false);
         } else if (((Button) screen).getId().equals(buttonAbout.getId())) {
             main_Pane.setVisible(false);
             about_Pane.setVisible(true);
             manageFlight_Pane.setVisible(false);
             managePlane_Pane.setVisible(false);
+            manageUsuarios_Pane.setVisible(false);
+            manageOffer_Pane.setVisible(false);
         } else if (((Button) screen).getId().equals(buttonAddPlane.getId())) {
             main_Pane.setVisible(false);
             about_Pane.setVisible(false);
             manageFlight_Pane.setVisible(false);
             managePlane_Pane.setVisible(true);
+            manageUsuarios_Pane.setVisible(false);
+            manageOffer_Pane.setVisible(false);
+        } else if (((Button) screen).getId().equals(buttonAddUsuario.getId())) {
+            main_Pane.setVisible(false);
+            about_Pane.setVisible(false);
+            manageFlight_Pane.setVisible(false);
+            managePlane_Pane.setVisible(false);
+            manageUsuarios_Pane.setVisible(true);
+            manageOffer_Pane.setVisible(false);
+        } else if (((Button) screen).getId().equals(buttonAddOffer.getId())) {
+            main_Pane.setVisible(false);
+            about_Pane.setVisible(false);
+            manageFlight_Pane.setVisible(false);
+            managePlane_Pane.setVisible(false);
+            manageUsuarios_Pane.setVisible(false);
+            manageOffer_Pane.setVisible(true);
         }
     }
 

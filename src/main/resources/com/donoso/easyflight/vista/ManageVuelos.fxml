@@ -3,7 +3,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import java.lang.String?>
-
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" layoutX="8.0" layoutY="8.0" prefHeight="548.0" prefWidth="885.0" visible="false" fx:controller="com.donoso.easyflight.controlador.ManageVuelosController">
     <children>
         <AnchorPane layoutX="7.0" layoutY="8.0" prefHeight="531.0" prefWidth="872.0" stylesheets="@../estilos/GestionVuelos.css">

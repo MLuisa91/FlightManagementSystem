@@ -27,5 +27,11 @@ public class Oferta implements Serializable {
 
     private LocalDate fechaFinal;
 
+    public Oferta (Integer id, String nombre, String descripcion){
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+
 
 }

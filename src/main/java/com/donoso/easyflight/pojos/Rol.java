@@ -21,4 +21,8 @@ public class Rol implements Serializable {
 
     private Set<UsuarioRol> usuarioRol;
 
+    public Rol(Integer id){
+        this.id = id;
+    }
+
 }

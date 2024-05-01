@@ -1,10 +1,8 @@
 package com.donoso.easyflight.controlador;
 
-import com.donoso.easyflight.crud.CrudVuelos;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 
 import java.net.URL;
@@ -23,14 +21,14 @@ public class HomeController implements Initializable {
 
     @FXML
     private Label main_AnnualTotalFlights;
-    private CrudVuelos crudVuelos;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        pintarEstadísticas();
+        //pintarEstadísticas();
     }
 
-    private void inicializarDataChart(Integer totalVuelosMesActual, Integer totalVuelosAnioAtual, Integer vuelosTotal) {
+    /*private void inicializarDataChart(Integer totalVuelosMesActual, Integer totalVuelosAnioAtual, Integer vuelosTotal) {
         dataChart.setTitle("Vuelos Compañía");
 
         XYChart.Series<String, Number> series1 = new XYChart.Series<>();
@@ -64,5 +62,5 @@ public class HomeController implements Initializable {
 
         inicializarLabel(totalVuelosMesActual, totalVuelosAnioAtual, vuelosTotal);
         inicializarDataChart(totalVuelosMesActual, totalVuelosAnioAtual, vuelosTotal);
-    }
+    }*/
 }

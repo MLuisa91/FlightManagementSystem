@@ -24,7 +24,7 @@ public class Avion extends StringConverter<Avion> implements Serializable {
 
     @Override
     public String toString(Avion avion) {
-        return null;
+        return avion != null ? avion.getId() : "Seleccione una opción";
     }
 
     @Override

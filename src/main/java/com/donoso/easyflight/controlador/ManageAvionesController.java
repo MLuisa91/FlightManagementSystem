@@ -1,9 +1,10 @@
 package com.donoso.easyflight.controlador;
 
 import com.donoso.easyflight.contexto.UsuarioHolder;
-import com.donoso.easyflight.crud.CrudAviones;
+import com.donoso.easyflight.http.HttpClient;
 import com.donoso.easyflight.pojos.Avion;
 import com.donoso.easyflight.pojos.Usuario;
+import com.donoso.easyflight.utils.URLApi;
 import com.donoso.easyflight.utils.Utiles;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,9 +22,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 public class ManageAvionesController implements Initializable {
@@ -39,8 +37,6 @@ public class ManageAvionesController implements Initializable {
     public TableColumn<Avion, String> column_modelo;
     public TableColumn<Avion, Integer> column_pasajeros;
     public TableView<Avion> tableViewPlanes;
-    private CrudAviones crudAviones;
-    private ObservableList<Avion> listaAviones;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -48,30 +44,18 @@ public class ManageAvionesController implements Initializable {
         Usuario usuario = holder.getUsuario();
 
 
-        if (!usuario.getIsAdministrador()) {
-            deshabilitarCampos();
+        try {
+            inicializaTableView();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-
-        inicializaTableView();
     }
 
-    private void deshabilitarCampos() {
-        button_ManagementPlaneAdd.setDisable(true);
-        button_ManagementPlaneClear.setDisable(true);
-        button_ManagementPlaneDelete.setDisable(true);
-        button_ManagementPlaneUpdate.setDisable(true);
-        txt_IdPlane.setEditable(false);
-        txt_PlaneModel.setEditable(false);
-        txt_PasengersNumber.setEditable(false);
+    private void inicializaTableView() throws Exception {
+        HttpClient<Avion, Avion[]> client = new HttpClient<>(Avion[].class);
+        Avion[] lista = client.execute(URLApi.API_AVION_SEARCH,new Avion(), "POST");
 
-    }
-
-    private void inicializaTableView() {
-        crudAviones = new CrudAviones();
-        listaAviones = crudAviones.listAllObservable();
-        List<Avion> lista = crudAviones.listAll();
         ObservableList<Avion> aviones = FXCollections.observableArrayList(lista);
-        ;
         this.tableViewPlanes.setItems(aviones);
         column_Id.setCellValueFactory(new PropertyValueFactory<>("id"));
         column_modelo.setCellValueFactory(new PropertyValueFactory<>("modelo"));
@@ -87,18 +71,23 @@ public class ManageAvionesController implements Initializable {
         }
     }
 
-    public void addPlane(ActionEvent actionEvent) throws IOException {
+    public void addPlane(ActionEvent actionEvent) throws Exception {
         Avion avion = recogerDatos();
+        HttpClient<Avion, Avion[]> client = new HttpClient<>(Avion[].class);
         if (avion != null)
-            if (crudAviones.findById(avion) == null)
-                if (crudAviones.add(avion)) {
+            try {
+                if (client.execute(URLApi.API_AVION_BY_ID.replace("{id}", avion.getId()), null, "GET") == null) {
+                    client.execute(URLApi.API_AVION_CREATE, avion, "POST");
                     mostrarMensajes("Información", "La operación se ha relizado correctamente.", Alert.AlertType.INFORMATION);
-                    reloadScreenVuelos(actionEvent);
+                    limpiarCampos();
+                    reloadScreenAviones(actionEvent);
                 } else {
-                    mostrarMensajes("Error", "Se ha producido un error al dar el alta el avion.", Alert.AlertType.ERROR);
+                    mostrarMensajes("Error", "El avión con id " + avion.getId() + " ya existe en base de datos", Alert.AlertType.ERROR);
                 }
-            else
-                mostrarMensajes("Error", "El avión con id " + avion.getId() + " ya existe en base de datos", Alert.AlertType.ERROR);
+            }catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
 
         inicializaTableView();
 
@@ -142,13 +131,20 @@ public class ManageAvionesController implements Initializable {
 
     }
 
-    public void updatePlane(ActionEvent actionEvent) throws IOException {
+    public void updatePlane(ActionEvent actionEvent) throws Exception {
         Avion avion = recogerDatos();
-        if (avion != null && crudAviones.update(avion)) {
-            mostrarMensajes("Información", "La operación se ha relizado correctamente.", Alert.AlertType.INFORMATION);
-            reloadScreenVuelos(actionEvent);
-        } else {
-            mostrarMensajes("Error", "Se ha producido un error en la actualización del avion.", Alert.AlertType.ERROR);
+        HttpClient<Avion, Avion> client = new HttpClient<>(Avion.class);
+        try {
+            if (client.execute(URLApi.API_AVION_BY_ID.replace("{id}", avion.getId()), null, "GET") != null) {
+                client.execute(URLApi.API_AVION_UPDATE, avion, "PUT");
+                mostrarMensajes("Información", "La operación se ha relizado correctamente.", Alert.AlertType.INFORMATION);
+                limpiarCampos();
+                reloadScreenAviones(actionEvent);
+            } else {
+                mostrarMensajes("Error", "Se ha producido un error en la actualización del avion.", Alert.AlertType.ERROR);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         inicializaTableView();
 
@@ -165,14 +161,24 @@ public class ManageAvionesController implements Initializable {
 
     }
 
-    public void deletePlane(ActionEvent actionEvent) throws IOException {
+    public void deletePlane(ActionEvent actionEvent) throws Exception {
         Avion avionSeleccionado = tableViewPlanes.getSelectionModel().getSelectedItem();
-        if (avionSeleccionado != null && crudAviones.delete(avionSeleccionado)) {
-            mostrarMensajes("Información", "La operación se ha relizado correctamente.", Alert.AlertType.INFORMATION);
-            reloadScreenVuelos(actionEvent);
-        } else {
-            mostrarMensajes("Error", "Se ha producido un error en el borrado del avion. " +
-                    "Compruebe que no está asociado a ningún vuelo.", Alert.AlertType.ERROR);
+        HttpClient<Avion, Avion> client = new HttpClient<>(Avion.class);
+        if (avionSeleccionado != null) {
+            try {
+                Avion avion = client.execute(URLApi.API_AVION_BY_ID.replace("{id}", avionSeleccionado.getId()), null, "GET");
+                if (avion != null) {
+                    client.execute(URLApi.API_AVION_DELETE.replace("{id}", avionSeleccionado.getId()), avionSeleccionado, "DELETE");
+                    mostrarMensajes("Información", "La operación se ha relizado correctamente.", Alert.AlertType.INFORMATION);
+                    limpiarCampos();
+                    reloadScreenAviones(actionEvent);
+                } else {
+                    mostrarMensajes("Error", "Se ha producido un error en el borrado del avion. " +
+                            "Compruebe que no está asociado a ningún vuelo.", Alert.AlertType.ERROR);
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
         inicializaTableView();
     }
@@ -184,18 +190,18 @@ public class ManageAvionesController implements Initializable {
         alert.showAndWait();
     }
 
-    private void reloadScreenVuelos(ActionEvent event) throws IOException {
+    private void reloadScreenAviones(ActionEvent event) throws IOException {
         // cerrar la ventana actual
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
         stage.close();
 
-        // Cargar la ventana de gestión de vuelos
+        // Cargar la ventana de gestión de aviones
         Parent root = FXMLLoader.load(getClass().getResource("/com/donoso/easyflight/vista/Main.fxml"));
 
         // Crear un nuevo Stage para la segunda ventana
         Stage segundaVentana = new Stage();
-        segundaVentana.setTitle("Gestión de Vuelos");
+        segundaVentana.setTitle("Gestión de Aviones");
         Scene escena = new Scene(root);
         segundaVentana.setScene(escena);
 
@@ -206,29 +212,29 @@ public class ManageAvionesController implements Initializable {
 
     }
 
-    public void buscar(KeyEvent keyEvent) {
+    public void buscar(KeyEvent keyEvent) throws Exception {
         String texto = txtSearchPlanes.getText();
+        HttpClient<Avion, Avion[]> client = new HttpClient<>(Avion[].class);
         if (texto.length() >= 3) {
-            Map<String, String> sqlWhere = obtenenerCondicionesWhere(texto);
+            Avion avion = obtenenerCondicionesWhere(texto);
 
-            List<Avion> lista = crudAviones.searchAviones(sqlWhere);
+            Avion[] lista = client.execute(URLApi.API_AVION_SEARCH, avion, "POST");
             ObservableList<Avion> avionesFiltrados = FXCollections.observableArrayList(lista);
-            ;
+
             tableViewPlanes.setItems(avionesFiltrados);
             column_Id.setCellValueFactory(new PropertyValueFactory<>("id"));
             column_modelo.setCellValueFactory(new PropertyValueFactory<>("modelo"));
             column_pasajeros.setCellValueFactory(new PropertyValueFactory<>("pasajeros"));
         } else {
-            tableViewPlanes.setItems(listaAviones);
+            inicializaTableView();
         }
     }
 
-    private Map<String, String> obtenenerCondicionesWhere(String texto) {
-        Map<String, String> sqlWhere = new HashMap<>();
-        sqlWhere.put("id", "%".concat(texto).concat("%"));
-        sqlWhere.put("modelo", "%".concat(texto).concat("%"));
-        sqlWhere.put("pasajeros", "%".concat(texto).concat("%"));
+    private Avion obtenenerCondicionesWhere(String texto) {
+        Integer pasajeros= null;
+        if(Utiles.validarSiNumero(texto))
+            pasajeros = Integer.parseInt(texto);
 
-        return sqlWhere;
+        return new Avion(texto,texto,pasajeros);
     }
 }

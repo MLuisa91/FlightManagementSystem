@@ -1,6 +1,7 @@
 package com.donoso.easyflight.pojos;
 
 
+import javafx.util.StringConverter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Usuario implements Serializable {
+public class Usuario extends StringConverter<Usuario> implements Serializable {
 
     private String idDni;
     private String nombre;
@@ -28,5 +29,19 @@ public class Usuario implements Serializable {
 
     public Boolean getIsAdministrador(){
         return Boolean.TRUE;
+    }
+
+    public Usuario (String id){
+        this.idDni = id;
+    }
+
+    @Override
+    public String toString(Usuario usuario) {
+        return null;
+    }
+
+    @Override
+    public Usuario fromString(String s) {
+        return null;
     }
 }

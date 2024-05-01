@@ -1,7 +1,6 @@
 package com.donoso.easyflight.controlador;
 
 import com.donoso.easyflight.contexto.UsuarioHolder;
-import com.donoso.easyflight.crud.CrudUsuarios;
 import com.donoso.easyflight.http.HttpClient;
 import com.donoso.easyflight.pojos.Usuario;
 import com.donoso.easyflight.utils.URLApi;
@@ -15,7 +14,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.ParseException;
 
 import java.io.IOException;
@@ -31,7 +29,7 @@ public class LoginController {
     private String user;
     private String password;
 
-    private CrudUsuarios crudUsuarios;
+
 
     @FXML
     void aceptar(ActionEvent event) {
@@ -91,7 +89,7 @@ public class LoginController {
      * LLamada de ejemplo para la api rest
      */
     private Usuario getUsuariosByUserAndPass(String user, String password) {
-        HttpClient<Usuario> client = new HttpClient<>(Usuario.class);
+        HttpClient<Usuario, Usuario> client = new HttpClient<>(Usuario.class);
 
         try {
             //Ejecutar y obtener la respuesta
