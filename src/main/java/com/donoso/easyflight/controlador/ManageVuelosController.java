@@ -35,6 +35,8 @@ public class ManageVuelosController implements Initializable {
 
     public ComboBox<Aeropuerto> combo_OrigenFlight;
     public ComboBox<Aeropuerto> combo_DestinoFlight;
+    public TableColumn<Vuelo, Double> column_Precio;
+    public TextField txt_PrecioFlight;
 
     @FXML
     private TableView<Vuelo> tableViewFlight;
@@ -127,6 +129,7 @@ public class ManageVuelosController implements Initializable {
         column_HoraSalida.setCellValueFactory(new PropertyValueFactory<>("horaSalida"));
         column_HoraLlegada.setCellValueFactory(new PropertyValueFactory<>("horaLlegada"));
         column_Avion.setCellValueFactory(vueloStringCellDataFeatures -> new SimpleStringProperty(vueloStringCellDataFeatures.getValue().getAvion().getId()));
+        column_Precio.setCellValueFactory(new PropertyValueFactory<>("precio"));
     }
 
     public void addFlight(ActionEvent actionEvent) throws Exception {
@@ -224,13 +227,19 @@ public class ManageVuelosController implements Initializable {
             }
         Avion avion = combo_AvionFlight.getValue();
         if (avion == null) {
-            errores += "- El campo Avion es obligatorio.";
+            errores += "- El campo Avion es obligatorio. \n";
+            correcto = false;
+        }
+
+        Double precio = Double.parseDouble(txt_PrecioFlight.getText());
+        if(precio == 0){
+            errores += "- El campo precio es obligatorio y debe ser superior a 0";
             correcto = false;
         }
 
         if (correcto) {
             vuelo = new Vuelo(id, origen, destino,
-                    fechaSalida, horaSalidaTime, horaLlegadaTime, avion);
+                    fechaSalida, horaSalidaTime, horaLlegadaTime, avion, precio);
         } else {
             mostrarMensajes("Error", errores, Alert.AlertType.ERROR);
         }
@@ -342,14 +351,18 @@ public class ManageVuelosController implements Initializable {
     private Vuelo obtenenerCondicionesWhere(String texto) {
         LocalDate fecha = null;
         LocalTime hora = null;
+        Double precio = null;
         if (Utiles.validarSiFecha(texto)) {
             fecha = Utiles.convertirADate(texto);
         }
         if (Utiles.validarHora(texto)) {
             hora = Utiles.convertirATime(texto);
         }
+        if (Utiles.validarSiNumero(texto)){
+            precio = Double.parseDouble(texto);
+        }
 
-        return new Vuelo(texto, new Aeropuerto(null, texto), new Aeropuerto(null, texto), fecha, hora, hora, new Avion(null, texto, null));
+        return new Vuelo(texto, new Aeropuerto(null, texto), new Aeropuerto(null, texto), fecha, hora, hora, new Avion(null, texto, null), precio);
     }
 
     private void reloadScreenHome(ActionEvent event) throws IOException {

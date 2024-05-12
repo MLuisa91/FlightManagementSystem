@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.donoso.easyflight.controlador.ManageRespaldoController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <AnchorPane layoutX="7.0" layoutY="8.0" prefHeight="531.0" prefWidth="872.0" stylesheets="@../estilos/GestionVuelos.css">
+        <children>
+            <AnchorPane prefHeight="302.0" prefWidth="871.0" stylesheets="@../estilos/GestionVuelos.css">
+                <styleClass>
+                    <String fx:value="white-bg" />
+                    <String fx:value="shadow" />
+                </styleClass>
+                <children>
+                    <TableView fx:id="tableViewRespaldo" layoutX="35.0" layoutY="48.0" prefHeight="231.0" prefWidth="432.0">
+                        <columns>
+                            <TableColumn fx:id="column_nombreRespaldo" prefWidth="200.00003051757812" text="Nombre" />
+                            <TableColumn fx:id="column_fechaRespaldo" prefWidth="231.19998168945312" text="Fecha" />
+                        </columns>
+                    </TableView>
+                    <TextField fx:id="txtSearchRespaldo" layoutX="32.0" layoutY="14.0" onKeyReleased="#buscar" prefHeight="26.0" prefWidth="283.0" promptText="Search" styleClass="search" stylesheets="@../estilos/GestionVuelos.css" />
+                </children>
+            </AnchorPane>
+            <Button fx:id="buttont_eliminarRespaldo" layoutX="259.0" layoutY="322.0" mnemonicParsing="false" onAction="#eliminarRespaldo" prefHeight="26.0" prefWidth="90.0" styleClass="buttonAction" stylesheets="@../estilos/GestionVuelos.css" text="Eliminar" />
+            <Button fx:id="buttont_restaurarRespaldo" layoutX="364.0" layoutY="322.0" mnemonicParsing="false" onAction="#restaurarRespaldo" prefHeight="26.0" prefWidth="90.0" styleClass="buttonAction" stylesheets="@../estilos/GestionVuelos.css" text="Restaurar" />
+        </children>
+        <styleClass>
+            <String fx:value="shadow" />
+            <String fx:value="white-bg" />
+        </styleClass>
+    </AnchorPane>
+
+</AnchorPane>

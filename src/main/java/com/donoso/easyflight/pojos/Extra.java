@@ -1,6 +1,7 @@
 package com.donoso.easyflight.pojos;
 
 
+import javafx.util.StringConverter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Extra implements Serializable {
+public class Extra extends StringConverter<Extra> implements Serializable {
 
 
     private Integer id;
@@ -27,4 +28,13 @@ public class Extra implements Serializable {
 
     private Set<ReservaExtra> reservaExtras;
 
+    @Override
+    public String toString(Extra extra) {
+        return extra != null ? extra.getNombre() : "Seleccione una opción";
+    }
+
+    @Override
+    public Extra fromString(String s) {
+        return null;
+    }
 }

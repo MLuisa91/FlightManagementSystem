@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import java.lang.String?>
+
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" layoutX="8.0" layoutY="8.0" prefHeight="548.0" prefWidth="885.0" visible="false" fx:controller="com.donoso.easyflight.controlador.ManageVuelosController">
     <children>
         <AnchorPane layoutX="7.0" layoutY="8.0" prefHeight="531.0" prefWidth="872.0" stylesheets="@../estilos/GestionVuelos.css">
@@ -22,6 +23,7 @@
                                 <TableColumn fx:id="column_HoraSalida" prefWidth="94.4000244140625" text="Hora Salida" />
                                 <TableColumn fx:id="column_HoraLlegada" prefWidth="104.0" text="Hora Llegada" />
                                 <TableColumn fx:id="column_Avion" prefWidth="93.60001220703123" text="Avión" />
+                                <TableColumn fx:id="column_Precio" prefWidth="83.19998779296873" text="Precio" />
                             </columns>
                         </TableView>
                         <TextField fx:id="txtSearchFlight" layoutX="32.0" layoutY="14.0" prefHeight="26.0" prefWidth="283.0" promptText="Search" styleClass="search" stylesheets="@../estilos/GestionVuelos.css" onKeyReleased="#buscar"/>
@@ -45,6 +47,8 @@
                 <Button fx:id="button_ManagementFlightDelete" layoutX="660.0" layoutY="454.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="90.0" styleClass="buttonAction" onAction="#deleteFlight" stylesheets="@../estilos/GestionVuelos.css" text="Delete" />
                 <ComboBox id="combo_OrigenFlight" fx:id="combo_OrigenFlight" layoutX="121.0" layoutY="367.0" prefHeight="26.0" prefWidth="177.0" />
                 <ComboBox id="combo_DestinoFlight" fx:id="combo_DestinoFlight" layoutX="121.0" layoutY="413.0" prefHeight="26.0" prefWidth="177.0" />
+                <TextField fx:id="txt_PrecioFlight" layoutX="421.0" layoutY="454.0" prefHeight="26.0" prefWidth="175.0" styleClass="textfield" stylesheets="@../estilos/GestionVuelos.css" />
+                <Label layoutX="378.0" layoutY="459.0" text="Precio:" />
             </children>
             <styleClass>
                 <String fx:value="shadow" />

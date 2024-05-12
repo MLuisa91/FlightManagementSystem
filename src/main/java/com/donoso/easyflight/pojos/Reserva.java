@@ -32,6 +32,16 @@ public class Reserva extends StringConverter<Reserva> implements Serializable {
 
     private Set<ReservaExtra> reservaExtras;
     private LocalDate fechaReserva;
+    Set<ReservaViajero> reservaViajeros;
+
+    public Reserva (String id, Usuario usuario, Vuelo vuelo, Oferta oferta, LocalDate fecha, Double total){
+        this.id = id;
+        this.usuario = usuario;
+        this.vuelo = vuelo;
+        this.oferta = oferta;
+        this.fechaReserva = fecha;
+        this.total = total;
+    }
 
     @Override
     public String toString(Reserva reserva) {

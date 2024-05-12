@@ -18,7 +18,7 @@ public class UsuarioRol {
     private Rol rol;
 
     public UsuarioRol(Usuario usuario, Rol rol){
-        this.id = new UsuarioRolPK(usuario.getIdDni(), rol.getId());
+        this.id = new UsuarioRolPK(usuario.getId(), rol.getId());
         this.usuario = usuario;
         this.rol = rol;
     }

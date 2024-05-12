@@ -86,8 +86,8 @@
                                     <Image url="@../imagenes/home_13317806.png" />
                                  </image>
                               </ImageView>
-                              <Button fx:id="buttonAbout" alignment="CENTER" layoutX="10.0" layoutY="403.0" mnemonicParsing="false" onAction="#switchScreen" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../estilos/GestionVuelos.css" text="About" />
-                              <ImageView fitHeight="22.0" fitWidth="23.0" layoutX="19.0" layoutY="403.0" pickOnBounds="true" preserveRatio="true">
+                              <Button fx:id="buttonAbout" alignment="CENTER" layoutX="10.0" layoutY="433.0" mnemonicParsing="false" onAction="#switchScreen" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../estilos/GestionVuelos.css" text="About" />
+                              <ImageView fitHeight="22.0" fitWidth="23.0" layoutX="19.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../imagenes/info_471662.png" />
                                  </image>
@@ -115,6 +115,12 @@
                                     <Image url="@../imagenes/plus_12637227.png" />
                                  </image>
                               </ImageView>
+                              <Button fx:id="buttonRespaldo" alignment="CENTER" layoutX="10.0" layoutY="403.0" mnemonicParsing="false" onAction="#switchScreen" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../estilos/GestionVuelos.css" text="Respaldo" />
+                              <ImageView fx:id="image_addUser111" fitHeight="29.0" fitWidth="22.0" layoutX="19.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imagenes/plus_12637227.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </AnchorPane>
                      </children>
@@ -129,7 +135,8 @@
                         <fx:include source="ManageAviones.fxml" fx:id="managePlane_Pane" />
                         <fx:include source="ManageUsuarios.fxml" fx:id="manageUsuarios_Pane" />
                         <fx:include source="ManageOffer.fxml" fx:id="manageOffer_Pane" />
-                       <!-- <fx:include source="ManageBooking.fxml" fx:id="manageBooking_Pane" />-->
+                        <fx:include source="ManageBooking.fxml" fx:id="manageBooking_Pane" />
+                        <fx:include source="ManageRespaldo.fxml" fx:id="manageRespaldo_Pane" />
                         <fx:include source="AboutInfo.fxml" fx:id="about_Pane" />
 
                      </children>

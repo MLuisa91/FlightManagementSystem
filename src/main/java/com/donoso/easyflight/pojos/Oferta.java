@@ -1,6 +1,7 @@
 package com.donoso.easyflight.pojos;
 
 
+import javafx.util.StringConverter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Oferta implements Serializable {
+public class Oferta extends StringConverter<Vuelo> implements Serializable {
 
     private Integer id;
 
@@ -27,11 +28,20 @@ public class Oferta implements Serializable {
 
     private LocalDate fechaFinal;
 
+    private Vuelo vuelo;
+
     public Oferta (Integer id, String nombre, String descripcion){
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
+    @Override
+    public String toString(Vuelo vuelo) {
+        return null;
+    }
 
-
+    @Override
+    public Vuelo fromString(String s) {
+        return null;
+    }
 }

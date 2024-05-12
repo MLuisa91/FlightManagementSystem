@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.*?>
-<?import java.lang.String?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" layoutX="7.0" layoutY="5.0" prefHeight="551.0" prefWidth="884.0" stylesheets="@../estilos/GestionVuelos.css" visible="false">
+<?import javafx.scene.image.Image?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1"  layoutX="7.0" layoutY="5.0" prefHeight="551.0" prefWidth="884.0" stylesheets="@../estilos/GestionVuelos.css" visible="false">
     <children>
         <AnchorPane layoutX="156.0" layoutY="107.0" prefHeight="337.0" prefWidth="572.0" stylesheets="@../estilos/GestionVuelos.css">
             <styleClass>

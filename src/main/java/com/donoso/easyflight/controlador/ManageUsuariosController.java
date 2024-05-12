@@ -66,7 +66,7 @@ public class ManageUsuariosController implements Initializable {
 
         if (usuario != null) {
             try {
-                if (client.execute(URLApi.API_USER_BY_ID.replace("{id}", usuario.getIdDni()), null, "GET") == null) {
+                if (client.execute(URLApi.API_USER_BY_ID.replace("{id}", usuario.getId().toString()), null, "GET") == null) {
                     client.execute(URLApi.API_USER_CREATE, usuario, "POST");
                     limpiarCampos();
                     mostrarMensajes("Información", "La operación se ha relizado correctamente.", Alert.AlertType.INFORMATION);
@@ -85,13 +85,13 @@ public class ManageUsuariosController implements Initializable {
     public void handleRowSelection(MouseEvent mouseEvent) {
         Usuario usuarioSeleccionado = tableViewUsuarios.getSelectionModel().getSelectedItem();
         if (usuarioSeleccionado != null) {
-            txt_IdUsuario.setText(usuarioSeleccionado.getIdDni());
+            txt_IdUsuario.setText(usuarioSeleccionado.getId().toString());
             txt_NombreUSuario.setText(usuarioSeleccionado.getNombre());
             txt_ApellidosUsuario.setText(usuarioSeleccionado.getApellidos());
             txt_EmailUsuario.setText(usuarioSeleccionado.getEmail());
             txt_TelefonoUsuario.setText(usuarioSeleccionado.getTelefono());
             txt_User_Usuario.setText(usuarioSeleccionado.getUser());
-            txt_PasswordUsuario.setText(usuarioSeleccionado.getPassword());
+            txt_PasswordUsuario.setText(Utiles.desencriptarMD5(usuarioSeleccionado.getPassword()));
             combo_PaisUsuairio.setValue(usuarioSeleccionado.getPais());
             usuarioSeleccionado.getUsuarioRol().forEach(roles -> {
                 if (roles.getRol().getNombre().contains("OFERTA")){
@@ -115,7 +115,7 @@ public class ManageUsuariosController implements Initializable {
 
         if (usuario != null) {
             try {
-                if (client.execute(URLApi.API_USER_BY_ID.replace("{id}", usuario.getIdDni()), null, "GET") != null) {
+                if (client.execute(URLApi.API_USER_BY_ID.replace("{id}", usuario.getId().toString()), null, "GET") != null) {
                     client.execute(URLApi.API_USER_UPDATE, usuario, "PUT");
                     mostrarMensajes("Información", "La operación se ha realizado correctamente.", Alert.AlertType.INFORMATION);
                     limpiarCampos();
@@ -155,8 +155,8 @@ public class ManageUsuariosController implements Initializable {
         HttpClient<Usuario, Usuario> client = new HttpClient<>(Usuario.class);
         if (usuarioSeleccionado != null) {
             try {
-                if (client.execute(URLApi.API_USER_BY_ID.replace("{id}", usuarioSeleccionado.getIdDni()), null, "GET") != null) {
-                    client.execute(URLApi.API_USER_DELETE.replace("{id}", usuarioSeleccionado.getIdDni()), usuarioSeleccionado, "DELETE");
+                if (client.execute(URLApi.API_USER_BY_ID.replace("{id}", usuarioSeleccionado.getId().toString()), null, "GET") != null) {
+                    client.execute(URLApi.API_USER_DELETE.replace("{id}", usuarioSeleccionado.getId().toString()), usuarioSeleccionado, "DELETE");
                     mostrarMensajes("Información", "El usuario ha sido borrado de la base de datos", Alert.AlertType.INFORMATION);
                     limpiarCampos();
                     reloadScreenHome(event);
@@ -198,7 +198,7 @@ public class ManageUsuariosController implements Initializable {
 
         ObservableList<Usuario> usuarios = FXCollections.observableArrayList(lista);
         this.tableViewUsuarios.setItems(usuarios);
-        column_IdUsuario.setCellValueFactory(new PropertyValueFactory<>("idDni"));
+        column_IdUsuario.setCellValueFactory(new PropertyValueFactory<>("dni"));
         column_Nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         column_Apellidos.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
         column_Email.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -212,12 +212,12 @@ public class ManageUsuariosController implements Initializable {
         String errores = "Se han producido los siguientes errores:\n \n";
         Usuario usuario = null;
 
-        String id = txt_IdUsuario.getText();
-        if (id.isEmpty()) {
+        String dni = txt_IdUsuario.getText();
+        if (dni.isEmpty()) {
             errores += "- El campo ID es obligatorio.\n";
             correcto = false;
         } else {
-            if (!Utiles.validarDNI(id)) {
+            if (!Utiles.validarDNI(dni)) {
                 errores += "- El formato del DNI no es correcto.\n";
                 correcto = false;
             }
@@ -279,22 +279,22 @@ public class ManageUsuariosController implements Initializable {
         if (check_Admin.isSelected()) {
             check_Reserva.setDisable(false);
             check_Oferta.setDisable(false);
-            rol.add(new UsuarioRol(new Usuario(id), new Rol(1)));
+            rol.add(new UsuarioRol(new Usuario(usuario.getId()), new Rol(1)));
         }
         if (check_Cliente.isSelected()) {
-            rol.add(new UsuarioRol(new Usuario(id), new Rol(2)));
+            rol.add(new UsuarioRol(new Usuario(usuario.getId()), new Rol(2)));
         }
         if (check_Oferta.isSelected()) {
             check_Admin.setDisable(false);
-            rol.add(new UsuarioRol(new Usuario(id), new Rol(3)));
+            rol.add(new UsuarioRol(new Usuario(usuario.getId()), new Rol(3)));
         }
         if (check_Reserva.isSelected()) {
             check_Admin.setDisable(false);
-            rol.add(new UsuarioRol(new Usuario(id), new Rol(4)));
+            rol.add(new UsuarioRol(new Usuario(usuario.getId()), new Rol(4)));
         }
 
         if (correcto) {
-            usuario = new Usuario(id, nombre, apellidos, user, password, email, telefono, pais, rol);
+            usuario = new Usuario(null, dni, nombre, apellidos, user, Utiles.encriptarAMD5(password), email, telefono, pais, rol);
         } else {
             mostrarMensajes("Error", errores, Alert.AlertType.ERROR);
         }
@@ -343,7 +343,7 @@ public class ManageUsuariosController implements Initializable {
             ObservableList<Usuario> usuariosFiltrados = FXCollections.observableArrayList(lista);
             ;
             tableViewUsuarios.setItems(usuariosFiltrados);
-            column_IdUsuario.setCellValueFactory(new PropertyValueFactory<>("idDni"));
+            column_IdUsuario.setCellValueFactory(new PropertyValueFactory<>("dni"));
             column_Nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
             column_Apellidos.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
             column_Email.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -357,6 +357,6 @@ public class ManageUsuariosController implements Initializable {
     }
 
     private Usuario obtenenerCondicionesWhere(String texto) {
-        return new Usuario(texto, texto, texto, null, null, texto, texto, null, null);
+        return new Usuario(null, texto, texto, texto, null, null, texto, texto, null, null);
     }
 }

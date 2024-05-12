@@ -3,7 +3,9 @@ package com.donoso.easyflight.controlador;
 import com.donoso.easyflight.contexto.UsuarioHolder;
 import com.donoso.easyflight.http.HttpClient;
 import com.donoso.easyflight.pojos.Usuario;
+import com.donoso.easyflight.utils.EnumRoles;
 import com.donoso.easyflight.utils.URLApi;
+import com.donoso.easyflight.utils.Utiles;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,9 +41,9 @@ public class LoginController {
         //CrudUsuarios crudUsuarios = new CrudUsuarios();
         //Usuario u = crudUsuarios.searchUserByUserAndPassword(new Usuario(null, null, null, user, password, null));
 
-        Usuario u = this.getUsuariosByUserAndPass(user, password);
+        Usuario u = this.getUsuariosByUserAndPass(user, Utiles.encriptarAMD5(password));
 
-        if (u != null) {
+        if (validarAcceso(u)) {
             // Si el usuario existe en la aplicación accedemos
             try {
                 // cargar en el contexto el usuario logado
@@ -69,11 +71,21 @@ public class LoginController {
             } catch (Exception e) {
                 mostrarAlertError("Error al cargar la segunda ventana: " + e.getMessage());
             }
-        } else {
-            mostrarAlertError("El usuario no se encuentra en nuestra Base de Datos. Consulte con un administrador.");
         }
 
 
+    }
+
+    private boolean validarAcceso(Usuario usuario){
+        if(usuario == null){
+            mostrarAlertError("El usuario no se encuentra en nuestra Base de Datos. Consulte con un administrador.");
+            return false;
+        }
+        if(usuario.getUsuarioRol().size()==0 || (usuario.getUsuarioRol().size()==1 && usuario.getUsuarioRol().contains(EnumRoles.CLIENTE))){
+            mostrarAlertError("No tiene permiso de acceso a esta aplicación");
+            return false;
+        }
+        return true;
     }
 
     @FXML

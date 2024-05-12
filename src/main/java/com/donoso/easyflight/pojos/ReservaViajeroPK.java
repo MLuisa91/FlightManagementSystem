@@ -11,10 +11,10 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Getter
 @Setter
-public class UsuarioRolPK implements Serializable {
+public class ReservaViajeroPK implements Serializable {
 
-    private Integer usuarioId;
+    private String reservaId;
 
-    private Integer rolId;
+    private Integer viajeroId;
 
 }

@@ -2,6 +2,8 @@ package com.donoso.easyflight.controlador;
 
 import com.donoso.easyflight.contexto.UsuarioHolder;
 import com.donoso.easyflight.pojos.Usuario;
+import com.donoso.easyflight.pojos.UsuarioRol;
+import com.donoso.easyflight.utils.EnumRoles;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +22,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class MainController implements Initializable {
 
@@ -35,6 +38,8 @@ public class MainController implements Initializable {
     public Button buttonAddOffer;
     public AnchorPane manageOffer_Pane;
     public AnchorPane manageBooking_Pane;
+    public AnchorPane manageRespaldo_Pane;
+    public Button buttonRespaldo;
     @FXML
     private AnchorPane about_Pane;
 
@@ -72,8 +77,33 @@ public class MainController implements Initializable {
     public void switchScreen(ActionEvent event) throws IOException {
         UsuarioHolder holder = UsuarioHolder.getInstance();
         holder.setLatestScreen(event.getSource());
-        //si permisos
-        enableScreen(event.getSource());
+        if(checkPermisos(usuario, event.getSource())){
+            enableScreen(event.getSource());
+        }
+
+    }
+
+    private void mostrarMensajes(String titulo, String mensaje, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle(titulo);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+
+    public boolean checkPermisos(Usuario usuario, Object screen){
+        Set<UsuarioRol> rol = usuario.getUsuarioRol();
+
+        if(!rol.contains(EnumRoles.ADMIN)){
+            if(!rol.contains(EnumRoles.OFERTAS) && ((Button) screen).getId().equals(buttonAddOffer.getId())){
+                mostrarMensajes("Error", "No tiene permisos de acceso", Alert.AlertType.ERROR);
+                return false;
+            }
+            if(!rol.contains(EnumRoles.RESERVAS) && screen.equals("RESERVAS")){
+                mostrarMensajes("Error", "No tiene permisos de acceso", Alert.AlertType.ERROR);
+                return false;
+            }
+        }
+        return true;
     }
 
 
@@ -86,6 +116,8 @@ public class MainController implements Initializable {
             managePlane_Pane.setVisible(false);
             manageUsuarios_Pane.setVisible(false);
             manageOffer_Pane.setVisible(false);
+            manageBooking_Pane.setVisible(false);
+            manageRespaldo_Pane.setVisible(false);
         } else if (((Button) screen).getId().equals(buttonAddFlight.getId())) {
             main_Pane.setVisible(false);
             about_Pane.setVisible(false);
@@ -93,6 +125,8 @@ public class MainController implements Initializable {
             managePlane_Pane.setVisible(false);
             manageUsuarios_Pane.setVisible(false);
             manageOffer_Pane.setVisible(false);
+            manageBooking_Pane.setVisible(false);
+            manageRespaldo_Pane.setVisible(false);
         } else if (((Button) screen).getId().equals(buttonAbout.getId())) {
             main_Pane.setVisible(false);
             about_Pane.setVisible(true);
@@ -100,6 +134,8 @@ public class MainController implements Initializable {
             managePlane_Pane.setVisible(false);
             manageUsuarios_Pane.setVisible(false);
             manageOffer_Pane.setVisible(false);
+            manageBooking_Pane.setVisible(false);
+            manageRespaldo_Pane.setVisible(false);
         } else if (((Button) screen).getId().equals(buttonAddPlane.getId())) {
             main_Pane.setVisible(false);
             about_Pane.setVisible(false);
@@ -107,6 +143,8 @@ public class MainController implements Initializable {
             managePlane_Pane.setVisible(true);
             manageUsuarios_Pane.setVisible(false);
             manageOffer_Pane.setVisible(false);
+            manageBooking_Pane.setVisible(false);
+            manageRespaldo_Pane.setVisible(false);
         } else if (((Button) screen).getId().equals(buttonAddUsuario.getId())) {
             main_Pane.setVisible(false);
             about_Pane.setVisible(false);
@@ -114,6 +152,8 @@ public class MainController implements Initializable {
             managePlane_Pane.setVisible(false);
             manageUsuarios_Pane.setVisible(true);
             manageOffer_Pane.setVisible(false);
+            manageBooking_Pane.setVisible(false);
+            manageRespaldo_Pane.setVisible(false);
         } else if (((Button) screen).getId().equals(buttonAddOffer.getId())) {
             main_Pane.setVisible(false);
             about_Pane.setVisible(false);
@@ -121,6 +161,26 @@ public class MainController implements Initializable {
             managePlane_Pane.setVisible(false);
             manageUsuarios_Pane.setVisible(false);
             manageOffer_Pane.setVisible(true);
+            manageBooking_Pane.setVisible(false);
+            manageRespaldo_Pane.setVisible(false);
+        }else if (((Button) screen).getId().equals(buttonAddBooking.getId())) {
+            main_Pane.setVisible(false);
+            about_Pane.setVisible(false);
+            manageFlight_Pane.setVisible(false);
+            managePlane_Pane.setVisible(false);
+            manageUsuarios_Pane.setVisible(false);
+            manageOffer_Pane.setVisible(false);
+            manageBooking_Pane.setVisible(true);
+            manageRespaldo_Pane.setVisible(false);
+        }else if (((Button) screen).getId().equals(buttonRespaldo.getId())) {
+            main_Pane.setVisible(false);
+            about_Pane.setVisible(false);
+            manageFlight_Pane.setVisible(false);
+            managePlane_Pane.setVisible(false);
+            manageUsuarios_Pane.setVisible(false);
+            manageOffer_Pane.setVisible(false);
+            manageBooking_Pane.setVisible(false);
+            manageRespaldo_Pane.setVisible(true);
         }
     }
 

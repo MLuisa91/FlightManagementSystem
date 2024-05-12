@@ -30,10 +30,15 @@ public class Vuelo extends StringConverter<Vuelo> implements Serializable {
     private LocalTime horaLlegada;
 
     private Avion avion;
+    private Double precio;
+
+    public Vuelo(String id){
+        this.id = id;
+    }
 
     @Override
     public String toString(Vuelo vuelo) {
-        return null;
+        return vuelo != null ? vuelo.getId() : "Seleccione una opción";
     }
 
     @Override

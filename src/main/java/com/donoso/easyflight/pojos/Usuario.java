@@ -16,7 +16,8 @@ import java.util.Set;
 @Setter
 public class Usuario extends StringConverter<Usuario> implements Serializable {
 
-    private String idDni;
+    private Integer id;
+    private String dni;
     private String nombre;
     private String apellidos;
     private String user;
@@ -31,8 +32,8 @@ public class Usuario extends StringConverter<Usuario> implements Serializable {
         return Boolean.TRUE;
     }
 
-    public Usuario (String id){
-        this.idDni = id;
+    public Usuario (Integer id){
+        this.id = id;
     }
 
     @Override

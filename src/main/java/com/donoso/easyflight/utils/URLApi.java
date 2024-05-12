@@ -37,4 +37,25 @@ public class URLApi {
     public static final String API_VUELO_CREATE = "vuelos/insertar";
     public static final String API_VUELO_DELETE = "vuelos/{id}";
 
+    //URLS PARA RESERVAS
+    public static final String API_RESERVA_SEARCH = "reservas/search";
+    public static final String API_RESERVA_BY_ID = "reservas/{id}";
+    public static final String API_RESERVA_UPDATE = "reservas/actualizar";
+    public static final String API_RESERVA_CREATE = "reservas/insertar";
+    public static final String API_RESERVA_DELETE = "reservas/{id}";
+
+    //URLS PARA EXTRAS
+    public static final String API_EXTRA_SEARCH = "extras/search";
+    public static final String API_EXTRA_BY_ID = "extras/{id}";
+    public static final String API_EXTRA_UPDATE = "extras/actualizar";
+    public static final String API_EXTRA_CREATE = "extras/insertar";
+    public static final String API_EXTRA_DELETE = "extras/{id}";
+
+    //URLS PARA VIAJEROS
+    public static final String API_VIAJERO_SEARCH = "viajeros/search";
+    public static final String API_VIAJERO_BY_ID = "viajeros/{id}";
+    public static final String API_VIAJERO_UPDATE = "viajeros/actualizar";
+    public static final String API_VIAJERO_CREATE = "viajeros/insertar";
+    public static final String API_VIAJERO_DELETE = "viajeros/{id}";
+
 }

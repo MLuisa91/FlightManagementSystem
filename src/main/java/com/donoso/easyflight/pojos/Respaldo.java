@@ -5,16 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serializable;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class UsuarioRolPK implements Serializable {
-
-    private Integer usuarioId;
-
-    private Integer rolId;
-
+public class Respaldo {
+    private Integer id;
+    private String nombre;
+    private LocalDate fechaGenerada;
+    private LocalDate fechaRestaurada;
 }

@@ -5,16 +5,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serializable;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class UsuarioRolPK implements Serializable {
+public class ReservaViajero {
 
-    private Integer usuarioId;
+    private ReservaExtraPK id;
 
-    private Integer rolId;
+    private Reserva reserva;
 
+    private Viajero viajero;
 }

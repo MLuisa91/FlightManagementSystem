@@ -1,13 +1,25 @@
 package com.donoso.easyflight.utils;
 
+import javax.crypto.*;
+import javax.crypto.spec.SecretKeySpec;
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.InvalidKeyException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Utiles {
+
+    private static final String SECRETKEY = "EasyFlight";
 
     public static boolean validarSiNumero(String cadena){
         String patron = "[0-9]+";
@@ -166,5 +178,76 @@ public class Utiles {
         miLetra = asignacionLetra[resto];
 
         return miLetra;
+    }
+
+    public static String generarCodigoReservas() {
+        String letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String numeros = "0123456789";
+        Random random = new Random();
+        StringBuilder codigo = new StringBuilder();
+
+        for (int i = 0; i < 4; i++) {
+            codigo.append(letras.charAt(random.nextInt(letras.length())));
+        }
+
+        for (int i = 0; i < 2; i++) {
+            codigo.append(numeros.charAt(random.nextInt(numeros.length())));
+        }
+
+        return codigo.toString();
+    }
+
+    public static boolean verificarCodigoReserva (String codigo) {
+        if (codigo.length() != 6) {
+            return false;
+        }
+        for (int i = 0; i < 4; i++) {
+            if (!Character.isLetter(codigo.charAt(i)) || !Character.isUpperCase(codigo.charAt(i))) {
+                return false;
+            }
+        }
+        for (int i = 4; i < 6; i++) {
+            if (!Character.isDigit(codigo.charAt(i))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static String encriptarAMD5(String input) {
+        try {
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            md5.update(SECRETKEY.getBytes("utf-8"));
+            byte[] mensajeDiggester = md5.digest(input.getBytes());
+            BigInteger numero = new BigInteger(1, mensajeDiggester);
+            String tieneTexto = numero.toString(16);
+
+            while (tieneTexto.length() < 32) {
+                tieneTexto = "0" + tieneTexto;
+            }
+            return tieneTexto;
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String desencriptarMD5(String passwordBD){
+        try {
+            byte[] mensaje= Base64.getDecoder().decode(passwordBD.getBytes("utf-8"));
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            byte[] password = md5.digest(SECRETKEY.getBytes("utf-8"));
+            byte[] keyPassword = Arrays.copyOf(password,24);
+            SecretKey key = new SecretKeySpec(keyPassword, "DESede");
+            Cipher descipher = Cipher.getInstance("DESede");
+            descipher.init(Cipher.DECRYPT_MODE, key);
+            byte[] plaintext = descipher.doFinal(mensaje);
+
+            return new String(plaintext, "UTF-8");
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

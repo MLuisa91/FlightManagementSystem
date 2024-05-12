@@ -4,8 +4,10 @@ import com.donoso.easyflight.contexto.UsuarioHolder;
 import com.donoso.easyflight.http.HttpClient;
 import com.donoso.easyflight.pojos.Oferta;
 import com.donoso.easyflight.pojos.Usuario;
+import com.donoso.easyflight.pojos.Vuelo;
 import com.donoso.easyflight.utils.URLApi;
 import com.donoso.easyflight.utils.Utiles;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,7 +30,7 @@ import java.util.ResourceBundle;
 public class ManageOfertaController implements Initializable {
     public TableView<Oferta> tableViewOfertas;
     public TableColumn<Oferta, Integer> column_IdOferta;
-    public TableColumn<Oferta, String> column_Nombre;
+    public TableColumn<Oferta, String> column_NombreOferta;
     public TableColumn<Oferta, String> column_Descripcion;
     public TableColumn<Oferta, Double> column_Descuento;
     public TableColumn<Oferta, LocalDate> column_FechaInicio;
@@ -44,6 +46,8 @@ public class ManageOfertaController implements Initializable {
     public DatePicker date_FechaInicio;
     public DatePicker date_FechaFinal;
     public TextField txt_IdOferta;
+    public ComboBox<Vuelo> combo_VueloOferta;
+    public TableColumn<Oferta, String> column_Vuelo;
 
     public void addOferta(ActionEvent event) throws Exception {
         Oferta oferta = recogerDatos();
@@ -136,8 +140,15 @@ public class ManageOfertaController implements Initializable {
                 correcto = false;
             }
 
+        Vuelo vuelo = combo_VueloOferta.getValue();
+        if (vuelo == null) {
+            errores += "- El campo Vuelo es obligatorio.";
+            correcto = false;
+        }
+
+
         if (correcto) {
-            oferta = new Oferta(id, nombre, descripcion, descuento, fechaInicio, fechaFinal);
+            oferta = new Oferta(id, nombre, descripcion, descuento, fechaInicio, fechaFinal, vuelo);
         } else {
             mostrarMensajes("Error", errores, Alert.AlertType.ERROR);
         }
@@ -180,6 +191,7 @@ public class ManageOfertaController implements Initializable {
         txt_DescuentoOferta.clear();
         date_FechaFinal.setValue(null);
         date_FechaInicio.setValue(null);
+        combo_VueloOferta.setValue(null);
     }
 
     private void mostrarMensajes(String titulo, String mensaje, Alert.AlertType type) {
@@ -219,9 +231,19 @@ public class ManageOfertaController implements Initializable {
 
         try {
             inicializaTableView();
+            inicializaComboVuelos();
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void inicializaComboVuelos() throws Exception {
+        HttpClient<Vuelo, Vuelo[]> client = new HttpClient<>(Vuelo[].class);
+        Vuelo[] lista = client.execute(URLApi.API_VUELO_SEARCH, new Vuelo(), "POST");
+        ObservableList<Vuelo> vuelos = FXCollections.observableArrayList(lista);
+        combo_VueloOferta.setItems(vuelos);
+        combo_VueloOferta.setConverter(new Vuelo());
     }
 
     private void inicializaTableView() throws Exception {
@@ -231,11 +253,12 @@ public class ManageOfertaController implements Initializable {
         ObservableList<Oferta> ofertas = FXCollections.observableArrayList(lista);
         tableViewOfertas.setItems(ofertas);
         column_IdOferta.setCellValueFactory(new PropertyValueFactory<>("id"));
-        column_Nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        column_NombreOferta.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         column_Descripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         column_Descuento.setCellValueFactory(new PropertyValueFactory<>("descuento"));
         column_FechaInicio.setCellValueFactory(new PropertyValueFactory<>("fechaInicio"));
         column_FechaFinal.setCellValueFactory(new PropertyValueFactory<>("fechaFinal"));
+        column_Vuelo.setCellValueFactory(ofertaStringCellDataFeatures -> new SimpleStringProperty(ofertaStringCellDataFeatures.getValue().getVuelo().getId()));
 
     }
 
@@ -262,7 +285,7 @@ public class ManageOfertaController implements Initializable {
 
             tableViewOfertas.setItems(ofertasFiltradas);
             column_IdOferta.setCellValueFactory(new PropertyValueFactory<>("id"));
-            column_Nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+            column_NombreOferta.setCellValueFactory(new PropertyValueFactory<>("nombre"));
             column_Descripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
             column_Descuento.setCellValueFactory(new PropertyValueFactory<>("descuento"));
             column_FechaInicio.setCellValueFactory(new PropertyValueFactory<>("fechaInicio"));
