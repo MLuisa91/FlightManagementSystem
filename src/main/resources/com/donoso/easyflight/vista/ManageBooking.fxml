@@ -21,21 +21,22 @@
                 <children>
                     <TableView fx:id="tableViewReservas" layoutX="19.0" layoutY="48.0" prefHeight="231.0" prefWidth="836.0" onMouseClicked="#handleRowSelection">
                         <columns>
-                            <TableColumn fx:id="column_IdReserva" prefWidth="82.39997863769531" text="ID" />
-                            <TableColumn fx:id="column_Usuario" prefWidth="120.79998779296875" text="Usuario" />
-                            <TableColumn fx:id="column_Vuelo" prefWidth="104.00003051757812" text="Vuelo" />
-                            <TableColumn fx:id="column_Oferta" prefWidth="97.5999755859375" text="Oferta" />
-                            <TableColumn fx:id="column_FechaReserva" prefWidth="131.20001220703125" text="Fecha Reserva" />
-                            <TableColumn fx:id="column_Viajeros" prefWidth="96.79998779296875" text="Viajeros" />
-                            <TableColumn fx:id="column_Extras" prefWidth="116.00006103515625" text="Extras" />
-                            <TableColumn fx:id="column_Total" prefWidth="88.80010986328125" text="Total" />
+                            <TableColumn fx:id="column_IdReserva" prefWidth="52.80000305175781" text="Code" />
+                            <TableColumn fx:id="column_Usuario" prefWidth="82.4000244140625" text="Usuario" />
+                            <TableColumn fx:id="column_VueloIda" prefWidth="100.79998779296875" text="Vuelo Ida" />
+                            <TableColumn fx:id="column_VueloVuelta" prefWidth="120.79998779296875" text="Vuelo Vuelta" />
+                            <TableColumn fx:id="column_Oferta" prefWidth="86.4000244140625" text="Oferta" />
+                            <TableColumn fx:id="column_FechaReserva" prefWidth="97.60003662109375" text="Fecha Reserva" />
+                            <TableColumn fx:id="column_Viajeros" prefWidth="115.20001220703125" text="Viajeros" />
+                            <TableColumn fx:id="column_Extras" minWidth="1.220703125E-4" prefWidth="101.5999755859375" text="Extras" />
+                            <TableColumn fx:id="column_Total" minWidth="5.0" prefWidth="77.60003662109375" text="Total" />
                         </columns>
                     </TableView>
                     <TextField fx:id="txtSearchReservas" layoutX="32.0" layoutY="14.0" prefHeight="26.0" prefWidth="283.0" promptText="Search" styleClass="search" stylesheets="@../estilos/GestionVuelos.css" onKeyReleased="#buscar"/>
                 </children>
             </AnchorPane>
             <TextField fx:id="txt_IdReserva" layoutX="120.0" layoutY="323.0" prefHeight="26.0" prefWidth="175.0" styleClass="textfield" stylesheets="@../estilos/GestionVuelos.css" />
-            <Label layoutX="88.0" layoutY="329.0" text="ID:" />
+            <Label layoutX="64.0" layoutY="331.0" text="Código:" />
             <Label layoutX="27.0" layoutY="418.0" text="Fecha Reserva:" />
             <Label layoutX="63.0" layoutY="374.0" text="Usuario:" />
             <TextField fx:id="txt_TotalReserva" layoutX="424.0" layoutY="413.0" prefHeight="26.0" prefWidth="175.0" styleClass="textfield" stylesheets="@../estilos/GestionVuelos.css" />

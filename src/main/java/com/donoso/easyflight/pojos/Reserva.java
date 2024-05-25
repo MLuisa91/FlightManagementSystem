@@ -18,11 +18,13 @@ import java.util.Set;
 public class Reserva extends StringConverter<Reserva> implements Serializable {
 
 
-    private String id;
+    private Integer id;
+    private String code;
 
     private Usuario usuario;
 
-    private Vuelo vuelo;
+    private Vuelo vueloIda;
+    private Vuelo vueloVuelta;
 
     private Oferta oferta;
 
@@ -34,13 +36,17 @@ public class Reserva extends StringConverter<Reserva> implements Serializable {
     private LocalDate fechaReserva;
     Set<ReservaViajero> reservaViajeros;
 
-    public Reserva (String id, Usuario usuario, Vuelo vuelo, Oferta oferta, LocalDate fecha, Double total){
+    /*public Reserva (Integer id, Usuario usuario, Vuelo vueloIda, Oferta oferta, LocalDate fecha, Double total){
         this.id = id;
         this.usuario = usuario;
-        this.vuelo = vuelo;
+        this.vueloIda = vueloIda;
         this.oferta = oferta;
         this.fechaReserva = fecha;
         this.total = total;
+    }*/
+
+    public Reserva(Integer id) {
+        this.id = id;
     }
 
     @Override

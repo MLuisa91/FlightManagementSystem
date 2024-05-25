@@ -1,11 +1,17 @@
 package com.donoso.easyflight.controlador;
 
+import com.donoso.easyflight.http.HttpClient;
+import com.donoso.easyflight.pojos.Vuelo;
+import com.donoso.easyflight.utils.URLApi;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 
+import java.math.BigInteger;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
@@ -25,10 +31,14 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //pintarEstadísticas();
+        try {
+            pintarEstadísticas();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    /*private void inicializarDataChart(Integer totalVuelosMesActual, Integer totalVuelosAnioAtual, Integer vuelosTotal) {
+    private void inicializarDataChart(BigInteger totalVuelosMesActual, BigInteger totalVuelosAnioAtual, BigInteger vuelosTotal) {
         dataChart.setTitle("Vuelos Compañía");
 
         XYChart.Series<String, Number> series1 = new XYChart.Series<>();
@@ -47,20 +57,29 @@ public class HomeController implements Initializable {
 
     }
 
-    private void inicializarLabel(Integer totalVuelosMesActual, Integer totalVuelosAnioAtual, Integer vuelosTotal) {
-        crudVuelos = new CrudVuelos();
+    /**
+     *
+     * Método que setea los parámetros en sus respectivas label
+     * @param totalVuelosMesActual
+     * @param totalVuelosAnioAtual
+     * @param vuelosTotal
+     */
+    private void inicializarLabel(BigInteger totalVuelosMesActual, BigInteger totalVuelosAnioAtual, BigInteger vuelosTotal) {
         main_TotalMonthlyFlights.setText(totalVuelosMesActual.toString());
         main_AnnualTotalFlights.setText(totalVuelosAnioAtual.toString());
         main_TotalFlights.setText(vuelosTotal.toString());
     }
 
-    private void pintarEstadísticas() {
-        crudVuelos = new CrudVuelos();
-        Integer totalVuelosMesActual = crudVuelos.vuelosTotalesMesActual();
-        Integer totalVuelosAnioAtual = crudVuelos.vuelosTotalesAnioActual();
-        Integer vuelosTotal = crudVuelos.vuelosTotales();
+    private void pintarEstadísticas() throws Exception {
+        BigInteger totalVuelosMesActual = null;
+        BigInteger totalVuelosAnioAtual = null;
+        BigInteger vuelosTotal = null;
 
+        HttpClient<BigInteger, BigInteger> client = new HttpClient<>(BigInteger.class);
+        totalVuelosMesActual = client.execute(URLApi.API_VUELO_CONTADOR.replace("{tipo}", "MONTH"), null, "GET");
+        totalVuelosAnioAtual = client.execute(URLApi.API_VUELO_CONTADOR.replace("{tipo}", "YEAR"), null, "GET");
+        vuelosTotal = client.execute(URLApi.API_VUELO_CONTADOR.replace("{tipo}", "TOTAL"), null, "GET");
         inicializarLabel(totalVuelosMesActual, totalVuelosAnioAtual, vuelosTotal);
         inicializarDataChart(totalVuelosMesActual, totalVuelosAnioAtual, vuelosTotal);
-    }*/
+    }
 }

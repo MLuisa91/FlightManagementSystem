@@ -21,16 +21,39 @@ public class Utiles {
 
     private static final String SECRETKEY = "EasyFlight";
 
+    /**
+     * Método para validar si el parámetro que llega es un número
+     * @param cadena
+     * @return
+     */
     public static boolean validarSiNumero(String cadena){
         String patron = "[0-9]+";
 
         Pattern pattern = Pattern.compile(patron);
         Matcher matcher = pattern.matcher(cadena);
 
-        // Verificar si la cadena, en este caso el Id del vuelo, coincide con el patrón
         return matcher.matches();
     }
 
+    /**
+     * Método para validar si el parámetro es de tipo double
+     * @param cadena
+     * @return
+     */
+    public static boolean validarSiDouble(String cadena){
+        try{
+            Double.parseDouble(cadena);
+        } catch(Exception ex){
+        return false;
+        }
+        return true;
+    }
+
+    /**
+     * Método para validar el ID del Vuelo (XX0000)
+     * @param cadena
+     * @return
+     */
     public static boolean validarIdVuelo(String cadena) {
         // Expresión regular para el patrón alfanumérico
         String patron = "^[A-Z]{2}\\d{4}$";
@@ -42,6 +65,11 @@ public class Utiles {
         return matcher.matches();
     }
 
+    /**
+     * Método para validar si el parámetro cumple el patrón asignado a las horas
+     * @param cadena
+     * @return
+     */
     public static boolean validarHora(String cadena){
         String patron = "^([01]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$";
 
@@ -51,10 +79,21 @@ public class Utiles {
         return matcher.matches();
     }
 
+    /**
+     * Método para comprobar que la fecha de inicio sea anterior a la fecha final de las ofertas.
+     * @param fechaInicio
+     * @param fechaFinal
+     * @return
+     */
     public static boolean compararFechas(LocalDate fechaInicio, LocalDate fechaFinal){
         return fechaInicio.isBefore(fechaFinal);
     }
 
+    /**
+     * Método que convierte el parámetro a Time
+     * @param horas
+     * @return
+     */
     public static LocalTime convertirATime(String horas){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
@@ -65,6 +104,11 @@ public class Utiles {
         }
     }
 
+    /**
+     * Convierte a Local Date el parámetro
+     * @param fecha
+     * @return
+     */
     public static LocalDate convertirADate(String fecha){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
 
@@ -75,15 +119,31 @@ public class Utiles {
         }
     }
 
+    /**
+     * Método que comprueba que la hora de salida sea anterior a la hora de llegada de un vuelo
+     * @param horaSalida
+     * @param horaLlegada
+     * @return
+     */
     public static boolean validarHoras(LocalTime horaSalida, LocalTime horaLlegada) {
         return horaSalida.isBefore(horaLlegada);
     }
 
+    /**
+     * Método que comprueba que la fecha seleccionada sea anterior a la fecha actual
+     * @param fechaSeleccionada
+     * @return
+     */
     public static boolean validarFecha(LocalDate fechaSeleccionada) {
         LocalDate fechaActual = LocalDate.now();
         return !fechaSeleccionada.isBefore(fechaActual);
     }
 
+    /**
+     * Método que comprueba que el ID del Avión siga el patrón A000
+     * @param cadena
+     * @return
+     */
     public static boolean validarIdAvion(String cadena) {
 
         String patron = "^[A-Z]\\d{3}$";
@@ -94,6 +154,11 @@ public class Utiles {
         return matcher.matches();
     }
 
+    /**
+     * Método para comprobar que el parámetro sigue el patrón asignado a los números de Teléfono
+     * @param cadena
+     * @return
+     */
     public static boolean validarTelefono(String cadena) {
 
         String patron = "^[6|7|9][0-9]{8}$";
@@ -104,6 +169,11 @@ public class Utiles {
         return matcher.matches();
     }
 
+    /**
+     * Método que valida si el parámetro es una fecha
+     * @param cadena
+     * @return
+     */
     public static boolean validarSiFecha(String cadena){
         String patron = "([0-9]{4,})([-])([0-9]{2,})([-])([0-9]{2,})";
         Pattern pattern = Pattern.compile(patron);
@@ -112,12 +182,22 @@ public class Utiles {
         return matcher.matches();
     }
 
+    /**
+     * Método para comprobar que el parámetro sigue el patrón asignado a los Emails
+     * @param cadena
+     * @return
+     */
     public static Boolean validaEmail (String cadena) {
         Pattern pattern = Pattern.compile("^([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$");
         Matcher matcher = pattern.matcher(cadena);
         return matcher.matches();
     }
 
+    /**
+     * Método que comprueba que el parámetro sigue el patrón asignado a los DNI
+     * @param cadena
+     * @return
+     */
     public static boolean validarDNI(String cadena) {
 
         String letraMayuscula = ""; //Guardaremos la letra introducida en formato mayúscula
@@ -180,6 +260,10 @@ public class Utiles {
         return miLetra;
     }
 
+    /**
+     *Método que genera de forma automática un código a las reservas realizadas
+     * @return
+     */
     public static String generarCodigoReservas() {
         String letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String numeros = "0123456789";
@@ -197,6 +281,11 @@ public class Utiles {
         return codigo.toString();
     }
 
+    /**
+     * Método que verifica que el parámetro siga el patrón asignado al código de la reserva
+     * @param codigo
+     * @return
+     */
     public static boolean verificarCodigoReserva (String codigo) {
         if (codigo.length() != 6) {
             return false;
@@ -215,6 +304,11 @@ public class Utiles {
         return true;
     }
 
+    /**
+     * Método para encriptar las contraseñas de los usuarios en MD5
+     * @param input
+     * @return
+     */
     public static String encriptarAMD5(String input) {
         try {
             MessageDigest md5 = MessageDigest.getInstance("MD5");
@@ -233,6 +327,11 @@ public class Utiles {
         }
     }
 
+    /**
+     * Método que desencripta las contraseñas encriptadas en MD5
+     * @param passwordBD
+     * @return
+     */
     public static String desencriptarMD5(String passwordBD){
         try {
             byte[] mensaje= Base64.getDecoder().decode(passwordBD.getBytes("utf-8"));

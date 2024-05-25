@@ -16,4 +16,5 @@ public class Respaldo {
     private String nombre;
     private LocalDate fechaGenerada;
     private LocalDate fechaRestaurada;
+    private Boolean generada;
 }

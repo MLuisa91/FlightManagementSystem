@@ -36,6 +36,7 @@ public class URLApi {
     public static final String API_VUELO_UPDATE = "vuelos/actualizar";
     public static final String API_VUELO_CREATE = "vuelos/insertar";
     public static final String API_VUELO_DELETE = "vuelos/{id}";
+    public static final String API_VUELO_CONTADOR = "vuelos/contador/{tipo}";
 
     //URLS PARA RESERVAS
     public static final String API_RESERVA_SEARCH = "reservas/search";
@@ -57,5 +58,13 @@ public class URLApi {
     public static final String API_VIAJERO_UPDATE = "viajeros/actualizar";
     public static final String API_VIAJERO_CREATE = "viajeros/insertar";
     public static final String API_VIAJERO_DELETE = "viajeros/{id}";
+
+    //URLS PARA LOS BACKUP
+    public static final String API_RESPALDO_SEARCH = "respaldos/search";
+    public static final String API_RESPALDO_DELETE = "respaldos/{id}";
+    public static final String API_RESPALDO_RESTORE = "respaldos/restore/{id}";
+    public static final String API_RESPALDO_BY_ID = "respaldos/{id}";
+    public static final String API_RESPALDO_CREATE = "respaldos/create";
+
 
 }

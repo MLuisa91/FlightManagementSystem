@@ -2,36 +2,41 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="451.0" prefWidth="605.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.donoso.easyflight.controlador.ManageExtrasViajerosController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="629.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.donoso.easyflight.controlador.ManageExtrasViajerosController">
    <children>
-      <TableView fx:id="tableViewExtras" layoutX="42.0" layoutY="34.0" onMouseClicked="#handleRowSelection" prefHeight="123.0" prefWidth="534.0" stylesheets="@../estilos/GestionVuelos.css">
+      <TableView fx:id="tableViewExtras" layoutX="42.0" layoutY="34.0" onMouseClicked="#handleRowSelection" prefHeight="123.0" prefWidth="559.0" stylesheets="@../estilos/GestionVuelos.css">
          <columns>
             <TableColumn fx:id="columnNombreExtra" prefWidth="182.39998626708984" text="Nombre" />
             <TableColumn fx:id="columnDescripcionExtra" prefWidth="224.0" text="Descripción" />
-            <TableColumn fx:id="columnPrecioExtra" prefWidth="128.00009155273438" text="Precio" />
+            <TableColumn fx:id="columnPrecioExtra" prefWidth="152.00001831054692" text="Precio" />
          </columns>
       </TableView>
       <ComboBox fx:id="comboExtras" layoutX="42.0" layoutY="181.0" prefHeight="26.0" prefWidth="173.0" styleClass="textfield" stylesheets="@../estilos/GestionVuelos.css" />
-      <TableView fx:id="tableViewViajero" layoutX="42.0" layoutY="230.0" onMouseClicked="#handleRowSelection" prefHeight="123.0" prefWidth="534.0" stylesheets="@../estilos/GestionVuelos.css">
+      <TableView fx:id="tableViewViajero" layoutX="42.0" layoutY="230.0" onMouseClicked="#handleRowSelection" prefHeight="123.0" prefWidth="559.0" stylesheets="@../estilos/GestionVuelos.css">
          <columns>
-            <TableColumn fx:id="columnNombreViajero" prefWidth="190.39998626708984" text="Nombre" />
-            <TableColumn fx:id="columnApellidosViajero" prefWidth="208.0" text="Apellidos" />
-            <TableColumn fx:id="columnDniViajero" prefWidth="136.00009155273438" text="DNI" />
+            <TableColumn fx:id="columnNombreViajero" prefWidth="125.5999984741211" text="Nombre" />
+            <TableColumn fx:id="columnApellidosViajero" prefWidth="184.7999267578125" text="Apellidos" />
+            <TableColumn fx:id="columnDniViajero" prefWidth="126.4000244140625" text="DNI" />
+            <TableColumn fx:id="columnFechaNacimientoViajero" prefWidth="127.20004272460938" text="Fecha nacimiento" />
          </columns>
       </TableView>
       <Label layoutX="42.0" layoutY="376.0" text="Nombre:" />
       <TextField fx:id="txtNombreViajero" layoutX="103.0" layoutY="372.0" styleClass="textfield" stylesheets="@../estilos/GestionVuelos.css" />
       <Label layoutX="66.0" layoutY="408.0" text="DNI:" />
       <TextField fx:id="txtDniViajero" layoutX="103.0" layoutY="404.0" styleClass="textfield" stylesheets="@../estilos/GestionVuelos.css" />
-      <Label layoutX="276.0" layoutY="376.0" text="Apellidos:" />
-      <TextField fx:id="txtApellidosViajero" layoutX="343.0" layoutY="372.0" styleClass="textfield" stylesheets="@../estilos/GestionVuelos.css" />
-      <Button fx:id="buttonAddExtra" layoutX="510.0" layoutY="181.0" mnemonicParsing="false" onAction="#addExtra" prefHeight="26.0" prefWidth="65.0" styleClass="buttonAction" stylesheets="@../estilos/GestionVuelos.css" text="Add" />
-      <Button fx:id="buttonUpdateViajero" layoutX="510.0" layoutY="404.0" mnemonicParsing="false" onAction="#updateViajero" styleClass="buttonAction" stylesheets="@../estilos/GestionVuelos.css" text="Update" />
+      <Label layoutX="296.0" layoutY="376.0" text="Apellidos:" />
+      <TextField fx:id="txtApellidosViajero" layoutX="360.0" layoutY="372.0" styleClass="textfield" stylesheets="@../estilos/GestionVuelos.css" />
+      <Button fx:id="buttonAddExtra" layoutX="535.0" layoutY="181.0" mnemonicParsing="false" onAction="#addExtra" prefHeight="26.0" prefWidth="65.0" styleClass="buttonAction" stylesheets="@../estilos/GestionVuelos.css" text="Add" />
+      <Button fx:id="buttonUpdateViajero" layoutX="535.0" layoutY="371.0" mnemonicParsing="false" onAction="#updateViajero" styleClass="buttonAction" stylesheets="@../estilos/GestionVuelos.css" text="Update" />
+      <Button fx:id="button_Confirmar" layoutX="519.0" layoutY="436.0" mnemonicParsing="false" onAction="#confirmar" styleClass="buttonAction" stylesheets="@../estilos/GestionVuelos.css" text="Confirmar" />
+      <Label layoutX="252.0" layoutY="408.0" text="Fecha nacimiento:" />
+      <DatePicker fx:id="dateFechaNacimiento" layoutX="360.0" layoutY="404.0" prefHeight="26.0" prefWidth="146.0" styleClass="textfield" stylesheets="@../estilos/GestionVuelos.css" />
    </children>
 </AnchorPane>

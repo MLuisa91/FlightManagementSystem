@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Setter
 public class ReservaViajeroPK implements Serializable {
 
-    private String reservaId;
+    private Integer reservaId;
 
     private Integer viajeroId;
 

@@ -341,7 +341,7 @@ public class ManageUsuariosController implements Initializable {
 
             Usuario[] lista = client.execute(URLApi.API_USER_SEARCH, usuario, "POST");
             ObservableList<Usuario> usuariosFiltrados = FXCollections.observableArrayList(lista);
-            ;
+
             tableViewUsuarios.setItems(usuariosFiltrados);
             column_IdUsuario.setCellValueFactory(new PropertyValueFactory<>("dni"));
             column_Nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));

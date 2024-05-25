@@ -76,9 +76,9 @@
                                     <Image url="@../imagenes/log-out.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fitHeight="29.0" fitWidth="22.0" layoutX="19.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="31.0" fitWidth="38.0" layoutX="15.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../imagenes/plus_12637227.png" />
+                                    <Image url="@../imagenes/direct-flight_7205069.png" />
                                  </image>
                               </ImageView>
                               <ImageView fitHeight="25.0" fitWidth="24.0" layoutX="18.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
@@ -87,38 +87,38 @@
                                  </image>
                               </ImageView>
                               <Button fx:id="buttonAbout" alignment="CENTER" layoutX="10.0" layoutY="433.0" mnemonicParsing="false" onAction="#switchScreen" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../estilos/GestionVuelos.css" text="About" />
-                              <ImageView fitHeight="22.0" fitWidth="23.0" layoutX="19.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="22.0" fitWidth="23.0" layoutX="19.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../imagenes/info_471662.png" />
                                  </image>
                               </ImageView>
                               <Button fx:id="buttonAddPlane" alignment="CENTER" layoutX="14.0" layoutY="263.0" mnemonicParsing="false" onAction="#switchScreen" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../estilos/GestionVuelos.css" text="Add Plane" />
-                              <ImageView fitHeight="29.0" fitWidth="22.0" layoutX="19.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="25.0" fitWidth="29.0" layoutX="19.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../imagenes/plus_12637227.png" />
+                                    <Image url="@../imagenes/departures_158225.png" />
                                  </image>
                               </ImageView>
                               <ImageView fx:id="image_addUser" fitHeight="29.0" fitWidth="22.0" layoutX="19.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../imagenes/plus_12637227.png" />
+                                    <Image url="@../imagenes/user_2102647.png" />
                                  </image>
                               </ImageView>
                               <Button fx:id="buttonAddOffer" alignment="CENTER" layoutX="10.0" layoutY="333.0" mnemonicParsing="false" onAction="#switchScreen" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../estilos/GestionVuelos.css" text="Add Offer" />
                               <ImageView fx:id="image_addUser1" fitHeight="29.0" fitWidth="22.0" layoutX="19.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../imagenes/plus_12637227.png" />
+                                    <Image url="@../imagenes/discount_879757.png" />
                                  </image>
                               </ImageView>
                               <Button fx:id="buttonAddBooking" alignment="CENTER" layoutX="10.0" layoutY="368.0" mnemonicParsing="false" onAction="#switchScreen" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../estilos/GestionVuelos.css" text="Add Booking" />
                               <ImageView fx:id="image_addUser11" fitHeight="29.0" fitWidth="22.0" layoutX="19.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../imagenes/plus_12637227.png" />
+                                    <Image url="@../imagenes/folder_9340236.png" />
                                  </image>
                               </ImageView>
                               <Button fx:id="buttonRespaldo" alignment="CENTER" layoutX="10.0" layoutY="403.0" mnemonicParsing="false" onAction="#switchScreen" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../estilos/GestionVuelos.css" text="Respaldo" />
                               <ImageView fx:id="image_addUser111" fitHeight="29.0" fitWidth="22.0" layoutX="19.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../imagenes/plus_12637227.png" />
+                                    <Image url="@../imagenes/database_9438365.png" />
                                  </image>
                               </ImageView>
                            </children>

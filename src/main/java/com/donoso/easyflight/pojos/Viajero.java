@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,12 +15,13 @@ import java.io.Serializable;
 public class Viajero implements Serializable {
 
     private Integer id;
+
     private String dni;
 
     private String nombre;
 
     private String apellidos;
 
-    private boolean adulto;
+    private LocalDate fechaNacimiento;
 
 }

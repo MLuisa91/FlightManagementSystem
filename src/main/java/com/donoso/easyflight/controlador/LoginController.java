@@ -81,7 +81,7 @@ public class LoginController {
             mostrarAlertError("El usuario no se encuentra en nuestra Base de Datos. Consulte con un administrador.");
             return false;
         }
-        if(usuario.getUsuarioRol().size()==0 || (usuario.getUsuarioRol().size()==1 && usuario.getUsuarioRol().contains(EnumRoles.CLIENTE))){
+        if(usuario.getUsuarioRol().size() == 1 && usuario.getUsuarioRol().stream().filter(rol -> rol.getRol().getNombre().equals(EnumRoles.CLIENTE.name())).count() >= 1){
             mostrarAlertError("No tiene permiso de acceso a esta aplicación");
             return false;
         }

@@ -21,6 +21,8 @@ module com.donoso.easyflight {
     opens com.donoso.easyflight.controlador;
     exports com.donoso.easyflight.contexto;
     opens com.donoso.easyflight.contexto;
+    exports com.donoso.easyflight.utils;
+    opens com.donoso.easyflight.utils;
 
 
 }

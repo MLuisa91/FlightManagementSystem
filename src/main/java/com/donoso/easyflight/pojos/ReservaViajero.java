@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 public class ReservaViajero {
 
-    private ReservaExtraPK id;
+    private ReservaViajeroPK id;
 
     private Reserva reserva;
 

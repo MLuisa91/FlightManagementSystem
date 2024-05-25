@@ -5,7 +5,6 @@ import com.donoso.easyflight.pojos.Reserva;
 public final class ReservaHolder {
 
     private Reserva reserva;
-    private Object latestScreen;
 
     private static final ReservaHolder INSTANCE = new ReservaHolder();
 
@@ -17,15 +16,9 @@ public final class ReservaHolder {
         return this.reserva;
     }
 
-    public void setUsuario(Reserva reserva) {
+    public void setReserva(Reserva reserva) {
         this.reserva = reserva;
     }
 
-    public void setLatestScreen(Object screen) {
-        this.latestScreen = screen;
-    }
 
-    public Object getLatestScreen() {
-        return this.latestScreen;
-    }
 }

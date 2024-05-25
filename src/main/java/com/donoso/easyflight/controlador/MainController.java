@@ -1,9 +1,12 @@
 package com.donoso.easyflight.controlador;
 
 import com.donoso.easyflight.contexto.UsuarioHolder;
+import com.donoso.easyflight.http.HttpClient;
+import com.donoso.easyflight.pojos.Respaldo;
 import com.donoso.easyflight.pojos.Usuario;
 import com.donoso.easyflight.pojos.UsuarioRol;
 import com.donoso.easyflight.utils.EnumRoles;
+import com.donoso.easyflight.utils.URLApi;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,10 +22,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.function.Predicate;
 
 public class MainController implements Initializable {
 
@@ -72,6 +77,12 @@ public class MainController implements Initializable {
         if (holder.getLatestScreen() != null)
             enableScreen(holder.getLatestScreen());
 
+        HttpClient<Respaldo, Respaldo> client = new HttpClient<>(Respaldo.class);
+        try {
+            client.execute(URLApi.API_RESPALDO_CREATE, null, "POST");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void switchScreen(ActionEvent event) throws IOException {
@@ -91,14 +102,15 @@ public class MainController implements Initializable {
     }
 
     public boolean checkPermisos(Usuario usuario, Object screen){
-        Set<UsuarioRol> rol = usuario.getUsuarioRol();
+        Set<UsuarioRol> roles = usuario.getUsuarioRol();
 
-        if(!rol.contains(EnumRoles.ADMIN)){
-            if(!rol.contains(EnumRoles.OFERTAS) && ((Button) screen).getId().equals(buttonAddOffer.getId())){
+        Predicate<? super UsuarioRol> predicate = null;
+        if(usuario.getUsuarioRol().stream().noneMatch(rol -> rol.getRol().getNombre().equals(EnumRoles.ADMIN.name()))){
+            if(usuario.getUsuarioRol().stream().noneMatch(rol -> rol.getRol().getNombre().equals(EnumRoles.OFERTAS.name())) && ((Button) screen).getId().equals(buttonAddOffer.getId())){
                 mostrarMensajes("Error", "No tiene permisos de acceso", Alert.AlertType.ERROR);
                 return false;
             }
-            if(!rol.contains(EnumRoles.RESERVAS) && screen.equals("RESERVAS")){
+            if(usuario.getUsuarioRol().stream().noneMatch(rol -> rol.getRol().getNombre().equals(EnumRoles.RESERVAS.name())) && screen.equals("RESERVAS")){
                 mostrarMensajes("Error", "No tiene permisos de acceso", Alert.AlertType.ERROR);
                 return false;
             }

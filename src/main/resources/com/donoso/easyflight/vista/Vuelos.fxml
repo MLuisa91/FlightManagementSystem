@@ -93,14 +93,9 @@
                                     <Font name="Tahoma" size="14.0" />
                                  </font>
                               </Label>
-                              <ImageView fitHeight="28.0" fitWidth="30.0" layoutX="16.0" layoutY="514.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="31.0" fitWidth="38.0" layoutX="15.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../imagenes/log-out.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="29.0" fitWidth="22.0" layoutX="19.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../imagenes/plus_12637227.png" />
+                                    <Image url="@../imagenes/direct-flight_7205069.png" />
                                  </image>
                               </ImageView>
                               <ImageView fitHeight="25.0" fitWidth="24.0" layoutX="18.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
@@ -108,39 +103,39 @@
                                     <Image url="@../imagenes/home_13317806.png" />
                                  </image>
                               </ImageView>
-                              <Button fx:id="buttonAbout" alignment="CENTER" layoutX="12.0" layoutY="438.0" mnemonicParsing="false" onAction="#switchScreen" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../estilos/GestionVuelos.css" text="About" />
-                              <ImageView fitHeight="22.0" fitWidth="23.0" layoutX="21.0" layoutY="445.0" pickOnBounds="true" preserveRatio="true">
+                              <Button fx:id="buttonAbout" alignment="CENTER" layoutX="10.0" layoutY="433.0" mnemonicParsing="false" onAction="#switchScreen" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../estilos/GestionVuelos.css" text="About" />
+                              <ImageView fitHeight="22.0" fitWidth="23.0" layoutX="19.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../imagenes/info_471662.png" />
                                  </image>
                               </ImageView>
                               <Button fx:id="buttonAddPlane" alignment="CENTER" layoutX="14.0" layoutY="263.0" mnemonicParsing="false" onAction="#switchScreen" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../estilos/GestionVuelos.css" text="Add Plane" />
-                              <ImageView fitHeight="29.0" fitWidth="22.0" layoutX="19.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="25.0" fitWidth="29.0" layoutX="19.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../imagenes/plus_12637227.png" />
+                                    <Image url="@../imagenes/departures_158225.png" />
                                  </image>
                               </ImageView>
                               <ImageView fx:id="image_addUser" fitHeight="29.0" fitWidth="22.0" layoutX="19.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../imagenes/plus_12637227.png" />
+                                    <Image url="@../imagenes/user_2102647.png" />
                                  </image>
                               </ImageView>
                               <Button fx:id="buttonAddOffer" alignment="CENTER" layoutX="10.0" layoutY="333.0" mnemonicParsing="false" onAction="#switchScreen" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../estilos/GestionVuelos.css" text="Add Offer" />
                               <ImageView fx:id="image_addUser1" fitHeight="29.0" fitWidth="22.0" layoutX="19.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../imagenes/plus_12637227.png" />
+                                    <Image url="@../imagenes/discount_879757.png" />
                                  </image>
                               </ImageView>
                               <Button fx:id="buttonAddBooking" alignment="CENTER" layoutX="10.0" layoutY="368.0" mnemonicParsing="false" onAction="#switchScreen" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../estilos/GestionVuelos.css" text="Add Booking" />
                               <ImageView fx:id="image_addUser11" fitHeight="29.0" fitWidth="22.0" layoutX="19.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../imagenes/plus_12637227.png" />
+                                    <Image url="@../imagenes/folder_9340236.png" />
                                  </image>
                               </ImageView>
                               <Button fx:id="buttonRespaldo" alignment="CENTER" layoutX="10.0" layoutY="403.0" mnemonicParsing="false" onAction="#switchScreen" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../estilos/GestionVuelos.css" text="Respaldo" />
                               <ImageView fx:id="image_addUser111" fitHeight="29.0" fitWidth="22.0" layoutX="19.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../imagenes/plus_12637227.png" />
+                                    <Image url="@../imagenes/database_9438365.png" />
                                  </image>
                               </ImageView>
                            </children>
@@ -410,7 +405,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="manageBooking_Pane" layoutX="8.0" layoutY="8.0" prefHeight="551.0" prefWidth="884.0" stylesheets="@../estilos/GestionVuelos.css">
+                        <AnchorPane fx:id="manageBooking_Pane" layoutX="8.0" layoutY="8.0" prefHeight="551.0" prefWidth="884.0" stylesheets="@../estilos/GestionVuelos.css" visible="false">
                            <children>
                               <AnchorPane layoutX="7.0" layoutY="8.0" prefHeight="531.0" prefWidth="872.0" stylesheets="@../estilos/GestionVuelos.css">
                                  <children>
@@ -422,21 +417,22 @@
                                        <children>
                                           <TableView fx:id="tableViewReservas" layoutX="19.0" layoutY="48.0" prefHeight="231.0" prefWidth="836.0">
                                              <columns>
-                                                <TableColumn fx:id="column_IdReserva" prefWidth="82.39997863769531" text="ID" />
-                                                <TableColumn fx:id="column_Usuario" prefWidth="120.79998779296875" text="Usuario" />
-                                                <TableColumn fx:id="column_Vuelo" prefWidth="104.00003051757812" text="Vuelo" />
-                                                <TableColumn fx:id="column_Oferta" prefWidth="97.5999755859375" text="Oferta" />
-                                                <TableColumn fx:id="column_FechaReserva" prefWidth="131.20001220703125" text="Fecha Reserva" />
-                                                <TableColumn fx:id="column_Viajeros" prefWidth="96.79998779296875" text="Viajeros" />
-                                                <TableColumn fx:id="column_Extras" prefWidth="116.00006103515625" text="Extras" />
-                                                <TableColumn fx:id="column_Total" prefWidth="88.80010986328125" text="Total" />
+                                                <TableColumn fx:id="column_IdReserva" prefWidth="52.80000305175781" text="ID" />
+                                                <TableColumn fx:id="column_Usuario" prefWidth="82.4000244140625" text="Usuario" />
+                                                <TableColumn fx:id="column_VueloIda" prefWidth="100.79998779296875" text="Vuelo Ida" />
+                                                <TableColumn fx:id="column_VueloVuelta" prefWidth="120.79998779296875" text="Vuelo Vuelta" />
+                                                <TableColumn fx:id="column_Oferta" prefWidth="86.4000244140625" text="Oferta" />
+                                                <TableColumn fx:id="column_FechaReserva" prefWidth="97.60003662109375" text="Fecha Reserva" />
+                                                <TableColumn fx:id="column_Viajeros" prefWidth="115.20001220703125" text="Viajeros" />
+                                                <TableColumn fx:id="column_Extras" minWidth="1.220703125E-4" prefWidth="101.5999755859375" text="Extras" />
+                                                <TableColumn fx:id="column_Total" minWidth="5.0" prefWidth="77.60003662109375" text="Total" />
                                              </columns>
                                           </TableView>
                                           <TextField fx:id="txtSearchReservas" layoutX="32.0" layoutY="14.0" prefHeight="26.0" prefWidth="283.0" promptText="Search" styleClass="search" stylesheets="@../estilos/GestionVuelos.css" />
                                        </children>
                                     </AnchorPane>
                                     <TextField fx:id="txt_IdReserva" layoutX="120.0" layoutY="323.0" prefHeight="26.0" prefWidth="175.0" styleClass="textfield" stylesheets="@../estilos/GestionVuelos.css" />
-                                    <Label layoutX="88.0" layoutY="329.0" text="ID:" />
+                                    <Label layoutX="64.0" layoutY="331.0" text="Código:" />
                                     <Label layoutX="27.0" layoutY="418.0" text="Fecha Reserva:" />
                                     <Label layoutX="63.0" layoutY="374.0" text="Usuario:" />
                                     <TextField fx:id="txt_TotalReserva" layoutX="424.0" layoutY="413.0" prefHeight="26.0" prefWidth="175.0" styleClass="textfield" stylesheets="@../estilos/GestionVuelos.css" />
@@ -505,7 +501,7 @@
                               <String fx:value="shadow" />
                            </styleClass>
                         </AnchorPane>
-                        <AnchorPane fx:id="manageRespaldo_Pane" layoutX="9.0" layoutY="8.0" prefHeight="551.0" prefWidth="884.0" stylesheets="@../estilos/GestionVuelos.css" visible="false">
+                        <AnchorPane fx:id="manageRespaldo_Pane" layoutX="9.0" layoutY="8.0" prefHeight="551.0" prefWidth="884.0" stylesheets="@../estilos/GestionVuelos.css">
                            <children>
                               <AnchorPane layoutX="7.0" layoutY="8.0" prefHeight="531.0" prefWidth="872.0" stylesheets="@../estilos/GestionVuelos.css">
                                  <children>
@@ -515,17 +511,20 @@
                                           <String fx:value="shadow" />
                                        </styleClass>
                                        <children>
-                                          <TableView fx:id="tableViewRespaldo" layoutX="35.0" layoutY="48.0" prefHeight="231.0" prefWidth="432.0">
+                                          <TableView fx:id="tableViewRespaldo" layoutX="35.0" layoutY="48.0" prefHeight="231.0" prefWidth="769.0">
                                              <columns>
-                                                <TableColumn fx:id="column_nombreRespaldo" prefWidth="200.00003051757812" text="Nombre" />
-                                                <TableColumn fx:id="column_fechaRespaldo" prefWidth="231.19998168945312" text="Fecha" />
+                                                <TableColumn fx:id="columnIdRespaldo" prefWidth="91.19999694824219" text="Id" />
+                                                <TableColumn fx:id="columnNombreRespaldo" prefWidth="268.79998779296875" text="Nombre" />
+                                                <TableColumn fx:id="columnFechaGeneradaRespaldo" prefWidth="157.5999755859375" text="Fecha Generada" />
+                                                <TableColumn fx:id="columnFechaRestauradaRespaldo" prefWidth="144.79998779296875" text="Fecha Restaurada" />
+                                                <TableColumn fx:id="columnGeneradaRespaldo" prefWidth="108.7999267578125" text="Generada" />
                                              </columns>
                                           </TableView>
                                           <TextField fx:id="txtSearchRespaldo" layoutX="32.0" layoutY="14.0" onKeyReleased="#buscar" prefHeight="26.0" prefWidth="283.0" promptText="Search" styleClass="search" stylesheets="@../estilos/GestionVuelos.css" />
                                        </children>
                                     </AnchorPane>
-                                    <Button fx:id="buttont_eliminarRespaldo" layoutX="259.0" layoutY="322.0" mnemonicParsing="false" onAction="#eliminarRespaldo" prefHeight="26.0" prefWidth="90.0" styleClass="buttonAction" stylesheets="@../estilos/GestionVuelos.css" text="Eliminar" />
-                                    <Button fx:id="buttont_restaurarRespaldo" layoutX="364.0" layoutY="322.0" mnemonicParsing="false" onAction="#restaurarRespaldo" prefHeight="26.0" prefWidth="90.0" styleClass="buttonAction" stylesheets="@../estilos/GestionVuelos.css" text="Restaurar" />
+                                    <Button fx:id="buttontEliminarRespaldo" layoutX="259.0" layoutY="322.0" mnemonicParsing="false" onAction="#eliminarRespaldo" prefHeight="26.0" prefWidth="90.0" styleClass="buttonAction" stylesheets="@../estilos/GestionVuelos.css" text="Eliminar" />
+                                    <Button fx:id="buttontRestaurarRespaldo" layoutX="364.0" layoutY="322.0" mnemonicParsing="false" onAction="#restaurarRespaldo" prefHeight="26.0" prefWidth="90.0" styleClass="buttonAction" stylesheets="@../estilos/GestionVuelos.css" text="Restaurar" />
                                  </children>
                                  <styleClass>
                                     <String fx:value="shadow" />
