@@ -53,8 +53,6 @@ public class MainController implements Initializable {
 
     @FXML
     private Button buttonAddFlight;
-    @FXML
-    private Button button;
 
     @FXML
     private Button buttonHome;
@@ -77,12 +75,7 @@ public class MainController implements Initializable {
         if (holder.getLatestScreen() != null)
             enableScreen(holder.getLatestScreen());
 
-        HttpClient<Respaldo, Respaldo> client = new HttpClient<>(Respaldo.class);
-        try {
-            client.execute(URLApi.API_RESPALDO_CREATE, null, "POST");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+
     }
 
     public void switchScreen(ActionEvent event) throws IOException {

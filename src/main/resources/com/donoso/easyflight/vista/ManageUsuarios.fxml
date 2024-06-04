@@ -19,7 +19,7 @@
                         <TableView fx:id="tableViewUsuarios" layoutX="32.0" layoutY="48.0" prefHeight="231.0"
                                    prefWidth="805.0" onMouseClicked="#handleRowSelection">
                             <columns>
-                                <TableColumn fx:id="column_IdUsuario" prefWidth="45.600006103515625" text="ID"/>
+                                <TableColumn fx:id="column_IdUsuario" prefWidth="45.600006103515625" text="DNI"/>
                                 <TableColumn fx:id="column_Nombre" prefWidth="136.79998779296875" text="Nombre"/>
                                 <TableColumn fx:id="column_Apellidos" prefWidth="224.79998779296875" text="Apellidos"/>
                                 <TableColumn fx:id="column_Pais" prefWidth="88.0" text="País"/>
@@ -34,7 +34,7 @@
                 </AnchorPane>
                 <TextField fx:id="txt_IdUsuario" layoutX="120.0" layoutY="323.0" prefHeight="26.0" prefWidth="175.0"
                            styleClass="textfield" stylesheets="@../estilos/GestionVuelos.css" promptText="00000000X"/>
-                <Label layoutX="88.0" layoutY="329.0" text="ID:"/>
+                <Label layoutX="88.0" layoutY="329.0" text="DNI:"/>
                 <Label layoutX="82.0" layoutY="458.0" text="User:"/>
                 <Label layoutX="54.0" layoutY="418.0" text="Apellidos:"/>
                 <Label layoutX="58.0" layoutY="374.0" text="Nombre:"/>
@@ -75,6 +75,7 @@
                         <CheckBox fx:id="check_Oferta" layoutX="102.0" mnemonicParsing="false" text="Oferta" />
                         <CheckBox fx:id="check_Reserva" layoutX="204.0" mnemonicParsing="false" text="Reserva" />
                         <CheckBox fx:id="check_Cliente" layoutX="301.0" mnemonicParsing="false" text="Cliente" />
+                        <CheckBox fx:id="check_BDAdmin" layoutX="499.0" mnemonicParsing="false" text="BD Admin" />
                     </children>
                 </Group>
             </children>

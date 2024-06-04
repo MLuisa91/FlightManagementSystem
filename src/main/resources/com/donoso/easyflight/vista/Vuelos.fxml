@@ -295,7 +295,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="manageUsuarios_Pane" layoutX="8.0" layoutY="8.0" prefHeight="548.0" prefWidth="885.0" visible="false">
+                        <AnchorPane fx:id="manageUsuarios_Pane" layoutX="8.0" layoutY="8.0" prefHeight="548.0" prefWidth="885.0">
                            <children>
                               <AnchorPane layoutX="7.0" layoutY="8.0" prefHeight="531.0" prefWidth="872.0" stylesheets="@../estilos/GestionVuelos.css">
                                  <children>
@@ -344,9 +344,10 @@
                                           <CheckBox fx:id="check_Admin" mnemonicParsing="false" text="Admin" />
                                           <CheckBox fx:id="check_Oferta" layoutX="102.0" mnemonicParsing="false" text="Oferta" />
                                           <CheckBox fx:id="check_Reserva" layoutX="204.0" mnemonicParsing="false" text="Reserva" />
-                                          <CheckBox fx:id="check_Cliente" layoutX="301.0" mnemonicParsing="false" text="Cliente" />
+                                          <CheckBox fx:id="check_Cliente" layoutX="301.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="161.0" text="Cliente" />
                                        </children>
                                     </Group>
+                                    <CheckBox fx:id="check_BDAdmin" layoutX="499.0" layoutY="491.0" mnemonicParsing="false" text="BD Admin" />
                                  </children>
                                  <styleClass>
                                     <String fx:value="shadow" />
@@ -501,7 +502,7 @@
                               <String fx:value="shadow" />
                            </styleClass>
                         </AnchorPane>
-                        <AnchorPane fx:id="manageRespaldo_Pane" layoutX="9.0" layoutY="8.0" prefHeight="551.0" prefWidth="884.0" stylesheets="@../estilos/GestionVuelos.css">
+                        <AnchorPane fx:id="manageRespaldo_Pane" layoutX="9.0" layoutY="8.0" prefHeight="551.0" prefWidth="884.0" stylesheets="@../estilos/GestionVuelos.css" visible="false">
                            <children>
                               <AnchorPane layoutX="7.0" layoutY="8.0" prefHeight="531.0" prefWidth="872.0" stylesheets="@../estilos/GestionVuelos.css">
                                  <children>

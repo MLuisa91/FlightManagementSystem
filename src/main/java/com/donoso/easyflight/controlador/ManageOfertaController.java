@@ -123,7 +123,7 @@ public class ManageOfertaController implements Initializable {
             correcto = false;
         }else{
             if(!Utiles.validarFecha(fechaInicio)){
-                errores += "La fecha no debe ser anterior a la actual";
+                errores += "La fecha no debe ser anterior a la actual\n";
                 correcto = false;
             }
         }
@@ -271,6 +271,7 @@ public class ManageOfertaController implements Initializable {
             txt_DescuentoOferta.setText(ofertaSeleccionada.getDescuento().toString());
             date_FechaInicio.setValue(ofertaSeleccionada.getFechaInicio());
             date_FechaFinal.setValue(ofertaSeleccionada.getFechaFinal());
+            combo_VueloOferta.setValue(ofertaSeleccionada.getVuelo());
         }
     }
 

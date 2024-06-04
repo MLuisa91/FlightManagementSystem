@@ -36,7 +36,8 @@ public class ManageVuelosController implements Initializable {
     public ComboBox<Aeropuerto> combo_OrigenFlight;
     public ComboBox<Aeropuerto> combo_DestinoFlight;
     public TableColumn<Vuelo, Double> column_Precio;
-    public TextField txt_PrecioFlight;
+    @FXML
+    private TextField txt_PrecioFlight;
 
     @FXML
     private TableView<Vuelo> tableViewFlight;
@@ -286,6 +287,7 @@ public class ManageVuelosController implements Initializable {
         combo_OrigenFlight.setValue(null);
         date_FechaSalidaFlight.setValue(null);
         combo_AvionFlight.setValue(null);
+        txt_PrecioFlight.clear();
     }
 
     @FXML
@@ -322,6 +324,7 @@ public class ManageVuelosController implements Initializable {
             txt_HoraSalidaFlight.setText(vueloSeleccionado.getHoraSalida().toString());
             date_FechaSalidaFlight.setValue(vueloSeleccionado.getFechaSalida());
             combo_AvionFlight.setValue(vueloSeleccionado.getAvion());
+            txt_PrecioFlight.setText(vueloSeleccionado.getPrecio().toString());
         }
     }
 
@@ -343,6 +346,7 @@ public class ManageVuelosController implements Initializable {
             column_HoraSalida.setCellValueFactory(new PropertyValueFactory<>("horaSalida"));
             column_HoraLlegada.setCellValueFactory(new PropertyValueFactory<>("horaLlegada"));
             column_Avion.setCellValueFactory(vueloStringCellDataFeatures -> new SimpleStringProperty(vueloStringCellDataFeatures.getValue().getAvion().getId()));
+            column_Precio.setCellValueFactory(new PropertyValueFactory<>("precio"));
         } else {
             inicializaTableView();
         }
@@ -358,7 +362,7 @@ public class ManageVuelosController implements Initializable {
         if (Utiles.validarHora(texto)) {
             hora = Utiles.convertirATime(texto);
         }
-        if (Utiles.validarSiNumero(texto)){
+        if (Utiles.validarSiDouble(texto)){
             precio = Double.parseDouble(texto);
         }
 

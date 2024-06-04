@@ -179,7 +179,7 @@ public class ManageBookingController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         UsuarioHolder holder = UsuarioHolder.getInstance();
         Usuario usuario = holder.getUsuario();
-
+        deshabilitarCampos();
 
         try {
             inicializaTableView();
@@ -187,6 +187,15 @@ public class ManageBookingController implements Initializable {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void deshabilitarCampos() {
+        txt_IdReserva.setEditable(false);
+        txt_FechaReserva.setEditable(false);
+        txt_TotalReserva.setEditable(false);
+        txt_OfertaReserva.setEditable(false);
+        txt_VueloReserva.setEditable(false);
+        txt_UsuarioReserva.setEditable(false);
     }
 
     private void inicializaTableView() throws Exception {

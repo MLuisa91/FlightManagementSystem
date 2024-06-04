@@ -58,10 +58,12 @@ public class ManageUsuariosController implements Initializable {
     public TableColumn<Usuario, String> column_Telefono;
     public TextField txtSearchUsuarios;
     public Group checkGroup;
+    public CheckBox check_BDAdmin;
+    Usuario usuarioSeleccionado;
 
 
     public void addUsuario(ActionEvent event) {
-        Usuario usuario = recogerDatos();
+        Usuario usuario = recogerDatos(null);
         HttpClient<Usuario, Usuario> client = new HttpClient<>(Usuario.class);
 
         if (usuario != null) {
@@ -83,9 +85,9 @@ public class ManageUsuariosController implements Initializable {
     }
 
     public void handleRowSelection(MouseEvent mouseEvent) {
-        Usuario usuarioSeleccionado = tableViewUsuarios.getSelectionModel().getSelectedItem();
+        usuarioSeleccionado = tableViewUsuarios.getSelectionModel().getSelectedItem();
         if (usuarioSeleccionado != null) {
-            txt_IdUsuario.setText(usuarioSeleccionado.getId().toString());
+            txt_IdUsuario.setText(usuarioSeleccionado.getDni());
             txt_NombreUSuario.setText(usuarioSeleccionado.getNombre());
             txt_ApellidosUsuario.setText(usuarioSeleccionado.getApellidos());
             txt_EmailUsuario.setText(usuarioSeleccionado.getEmail());
@@ -102,6 +104,8 @@ public class ManageUsuariosController implements Initializable {
                     check_Reserva.setSelected(true);
                 }else if (roles.getRol().getNombre().contains("CLIENTE")){
                     check_Cliente.setSelected(true);
+                }else if(roles.getRol().getUsuarioRol().contains("BD_ADMIN")){
+                    check_BDAdmin.setSelected(true);
                 }
             });
 
@@ -110,13 +114,13 @@ public class ManageUsuariosController implements Initializable {
     }
 
     public void updateUsuario(ActionEvent event) {
-        Usuario usuario = recogerDatos();
+        usuarioSeleccionado = recogerDatos(usuarioSeleccionado);
         HttpClient<Usuario, Usuario> client = new HttpClient<>(Usuario.class);
 
-        if (usuario != null) {
+        if (usuarioSeleccionado != null) {
             try {
-                if (client.execute(URLApi.API_USER_BY_ID.replace("{id}", usuario.getId().toString()), null, "GET") != null) {
-                    client.execute(URLApi.API_USER_UPDATE, usuario, "PUT");
+                if (client.execute(URLApi.API_USER_BY_ID.replace("{id}", usuarioSeleccionado.getId().toString()), null, "GET") != null) {
+                    client.execute(URLApi.API_USER_UPDATE, usuarioSeleccionado, "PUT");
                     mostrarMensajes("Información", "La operación se ha realizado correctamente.", Alert.AlertType.INFORMATION);
                     limpiarCampos();
                     reloadScreenHome(event);
@@ -147,11 +151,12 @@ public class ManageUsuariosController implements Initializable {
         check_Reserva.setSelected(false);
         check_Oferta.setSelected(false);
         check_Cliente.setSelected(false);
+        check_BDAdmin.setSelected(false);
 
     }
 
     public void deleteUsuario(ActionEvent event) {
-        Usuario usuarioSeleccionado = tableViewUsuarios.getSelectionModel().getSelectedItem();
+        usuarioSeleccionado = tableViewUsuarios.getSelectionModel().getSelectedItem();
         HttpClient<Usuario, Usuario> client = new HttpClient<>(Usuario.class);
         if (usuarioSeleccionado != null) {
             try {
@@ -207,14 +212,14 @@ public class ManageUsuariosController implements Initializable {
 
     }
 
-    private Usuario recogerDatos() {
+    private Usuario recogerDatos(Usuario usuario) {
         boolean correcto = true;
         String errores = "Se han producido los siguientes errores:\n \n";
-        Usuario usuario = null;
+        Usuario nuevoUsuario = null;
 
         String dni = txt_IdUsuario.getText();
         if (dni.isEmpty()) {
-            errores += "- El campo ID es obligatorio.\n";
+            errores += "- El campo DNI es obligatorio.\n";
             correcto = false;
         } else {
             if (!Utiles.validarDNI(dni)) {
@@ -276,30 +281,57 @@ public class ManageUsuariosController implements Initializable {
         }
 
         Set<UsuarioRol> rol = new HashSet<>();
-        if (check_Admin.isSelected()) {
-            check_Reserva.setDisable(false);
-            check_Oferta.setDisable(false);
-            rol.add(new UsuarioRol(new Usuario(usuario.getId()), new Rol(1)));
-        }
-        if (check_Cliente.isSelected()) {
-            rol.add(new UsuarioRol(new Usuario(usuario.getId()), new Rol(2)));
-        }
-        if (check_Oferta.isSelected()) {
-            check_Admin.setDisable(false);
-            rol.add(new UsuarioRol(new Usuario(usuario.getId()), new Rol(3)));
-        }
-        if (check_Reserva.isSelected()) {
-            check_Admin.setDisable(false);
-            rol.add(new UsuarioRol(new Usuario(usuario.getId()), new Rol(4)));
+        if(usuario == null){
+            if (check_Admin.isSelected()) {
+                check_Reserva.setDisable(false);
+                check_Oferta.setDisable(false);
+                rol.add(new UsuarioRol(new Usuario(nuevoUsuario.getId()), new Rol(1)));
+            }
+            if (check_Cliente.isSelected()) {
+                rol.add(new UsuarioRol(new Usuario(nuevoUsuario.getId()), new Rol(2)));
+            }
+            if (check_Oferta.isSelected()) {
+                check_Admin.setDisable(false);
+                rol.add(new UsuarioRol(new Usuario(nuevoUsuario.getId()), new Rol(3)));
+            }
+            if (check_Reserva.isSelected()) {
+                check_Admin.setDisable(false);
+                rol.add(new UsuarioRol(new Usuario(nuevoUsuario.getId()), new Rol(4)));
+            }
+            if(check_BDAdmin.isSelected()){
+                rol.add(new UsuarioRol(new Usuario(nuevoUsuario.getId()), new Rol(5)));
+            }
+        }else if (usuario!=null){
+            if (check_Admin.isSelected()) {
+                check_Reserva.setDisable(false);
+                check_Oferta.setDisable(false);
+                rol.add(new UsuarioRol(new Usuario(usuario.getId()), new Rol(1)));
+            }
+            if (check_Cliente.isSelected()) {
+                rol.add(new UsuarioRol(new Usuario(usuario.getId()), new Rol(2)));
+            }
+            if (check_Oferta.isSelected()) {
+                check_Admin.setDisable(false);
+                rol.add(new UsuarioRol(new Usuario(usuario.getId()), new Rol(3)));
+            }
+            if (check_Reserva.isSelected()) {
+                check_Admin.setDisable(false);
+                rol.add(new UsuarioRol(new Usuario(usuario.getId()), new Rol(4)));
+            }
+            if(check_BDAdmin.isSelected()){
+                rol.add(new UsuarioRol(new Usuario(usuario.getId()), new Rol(5)));
+            }
         }
 
+
         if (correcto) {
-            usuario = new Usuario(null, dni, nombre, apellidos, user, Utiles.encriptarAMD5(password), email, telefono, pais, rol);
+            Integer id = usuario ==null ? null : usuario.getId();
+            nuevoUsuario = new Usuario(id, dni, nombre, apellidos, user, Utiles.encriptarAMD5(password), email, telefono, pais, rol);
         } else {
             mostrarMensajes("Error", errores, Alert.AlertType.ERROR);
         }
 
-        return usuario;
+        return nuevoUsuario;
 
     }
 

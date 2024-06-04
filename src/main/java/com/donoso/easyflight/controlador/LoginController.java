@@ -35,11 +35,8 @@ public class LoginController {
 
     @FXML
     void aceptar(ActionEvent event) {
-        //this.llamarAPI();
         user = txtUser.getText();
         password = txtPassword.getText();
-        //CrudUsuarios crudUsuarios = new CrudUsuarios();
-        //Usuario u = crudUsuarios.searchUserByUserAndPassword(new Usuario(null, null, null, user, password, null));
 
         Usuario u = this.getUsuariosByUserAndPass(user, Utiles.encriptarAMD5(password));
 
@@ -108,10 +105,6 @@ public class LoginController {
             return client.execute(URLApi.API_USER_BY_ID_PASSWORD.concat(user)
                     .concat("/")
                     .concat(password), null, "GET");
-
-            // TODO: PETICIÓN POST como enviar la información
-            /*JsonConverter<Usuarios> converter = new JsonConverter<>(Usuarios.class);
-            client.execute("usuarios/insertar", converter.jsonToObject(result), "POST");*/
 
         } catch (ParseException | IOException e) {
             System.out.println("-> " + e.getClass().getName());
