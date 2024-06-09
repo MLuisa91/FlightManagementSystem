@@ -17,12 +17,12 @@
                 <String fx:value="shadow" />
             </styleClass>
             <children>
-                <Label layoutX="112.0" layoutY="58.0" prefHeight="21.0" prefWidth="434.0" text="Flight Managment System 2024.1.04">
+                <Label layoutX="112.0" layoutY="58.0" prefHeight="21.0" prefWidth="434.0" text="Flight Managment System 2024.2.04">
                     <font>
                         <Font name="Tahoma Bold" size="18.0" />
                     </font>
                 </Label>
-                <Label layoutX="112.0" layoutY="94.0" prefHeight="21.0" prefWidth="434.0" text="Febrero, 2024.">
+                <Label layoutX="112.0" layoutY="94.0" prefHeight="21.0" prefWidth="434.0" text="Junio, 2024.">
                     <font>
                         <Font size="13.0" />
                     </font>
@@ -32,7 +32,7 @@
                         <Font size="13.0" />
                     </font>
                 </Label>
-                <Label layoutX="111.0" layoutY="138.0" prefHeight="21.0" prefWidth="434.0" text="Desarrollo de Interfaces.">
+                <Label layoutX="111.0" layoutY="138.0" prefHeight="21.0" prefWidth="434.0" text="Módulo profesional de Proyecto.">
                     <font>
                         <Font size="13.0" />
                     </font>
