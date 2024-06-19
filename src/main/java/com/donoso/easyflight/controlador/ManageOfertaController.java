@@ -121,11 +121,6 @@ public class ManageOfertaController implements Initializable {
         if(fechaInicio == null){
             errores += "El campo fecha inicio es obligatorio.\n";
             correcto = false;
-        }else{
-            if(!Utiles.validarFecha(fechaInicio)){
-                errores += "La fecha no debe ser anterior a la actual\n";
-                correcto = false;
-            }
         }
 
         LocalDate fechaFinal = date_FechaFinal.getValue();
@@ -136,7 +131,7 @@ public class ManageOfertaController implements Initializable {
 
         if (fechaInicio != null && fechaFinal != null)
             if (!Utiles.compararFechas(fechaInicio, fechaFinal)) {
-                errores += "La fecha de inicio no debe ser poserior a la final. \n";
+                errores += "La fecha de inicio no debe ser posterior a la final. \n";
                 correcto = false;
             }
 

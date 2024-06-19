@@ -95,12 +95,18 @@ public class ManageUsuariosController implements Initializable {
             txt_User_Usuario.setText(usuarioSeleccionado.getUser());
             txt_PasswordUsuario.setText(Utiles.desencriptarMD5(usuarioSeleccionado.getPassword()));
             combo_PaisUsuairio.setValue(usuarioSeleccionado.getPais());
+
+            check_Oferta.setSelected(false);
+            check_Admin.setSelected(false);
+            check_Reserva.setSelected(false);
+            check_Cliente.setSelected(false);
+            check_BDAdmin.setSelected(false);
             usuarioSeleccionado.getUsuarioRol().forEach(roles -> {
-                if (roles.getRol().getNombre().contains("OFERTA")){
+                if (roles.getRol().getNombre().contains("OFERTAS")){
                     check_Oferta.setSelected(true);
                 }else if (roles.getRol().getNombre().contains("ADMIN")){
                     check_Admin.setSelected(true);
-                }else if (roles.getRol().getNombre().contains("RESERVA")){
+                }else if (roles.getRol().getNombre().contains("RESERVAS")){
                     check_Reserva.setSelected(true);
                 }else if (roles.getRol().getNombre().contains("CLIENTE")){
                     check_Cliente.setSelected(true);

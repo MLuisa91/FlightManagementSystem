@@ -281,6 +281,7 @@ public class ManageVuelosController implements Initializable {
 
     private void limpiarCampos() {
         txt_IdFlight.clear();
+        txt_IdFlight.setEditable(true);
         txt_HoraSalidaFlight.clear();
         txt_HoraLlegadaFlight.clear();
         combo_DestinoFlight.setValue(null);

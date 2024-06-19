@@ -295,7 +295,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="manageUsuarios_Pane" layoutX="8.0" layoutY="8.0" prefHeight="548.0" prefWidth="885.0">
+                        <AnchorPane fx:id="manageUsuarios_Pane" layoutX="8.0" layoutY="8.0" prefHeight="548.0" prefWidth="885.0" visible="false">
                            <children>
                               <AnchorPane layoutX="7.0" layoutY="8.0" prefHeight="531.0" prefWidth="872.0" stylesheets="@../estilos/GestionVuelos.css">
                                  <children>
@@ -502,7 +502,7 @@
                               <String fx:value="shadow" />
                            </styleClass>
                         </AnchorPane>
-                        <AnchorPane fx:id="manageRespaldo_Pane" layoutX="9.0" layoutY="8.0" prefHeight="551.0" prefWidth="884.0" stylesheets="@../estilos/GestionVuelos.css" visible="false">
+                        <AnchorPane fx:id="manageRespaldo_Pane" layoutX="9.0" layoutY="8.0" prefHeight="551.0" prefWidth="884.0" stylesheets="@../estilos/GestionVuelos.css">
                            <children>
                               <AnchorPane layoutX="7.0" layoutY="8.0" prefHeight="531.0" prefWidth="872.0" stylesheets="@../estilos/GestionVuelos.css">
                                  <children>
